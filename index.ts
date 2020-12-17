@@ -13,6 +13,8 @@ import * as base64 from '@zodash/crypto/lib/base64';
 import { md5 } from '@zodash/crypto/lib/md5';
 import * as aes from '@zodash/crypto/lib/aes';
 
+import shorturl from '@zodash/shorturl';
+
 // declare module '@koex/core' {
 //   interface Request {
 //       body: any;
@@ -609,6 +611,15 @@ app.get('/jsonp', async (ctx) => {
   };
 
   ctx.body = `${callback}(${JSON.stringify(data)})`;
+});
+
+app.post('/shorturl', async (ctx) => {
+  const { url } = ctx.request.body;
+
+  ctx.body = {
+    url,
+    shorturl: shorturl(url),
+  };
 });
 
 const port = +process.env.PORT || 8080;

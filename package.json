@@ -1,6 +1,6 @@
 {
   "name": "helloworld",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "index.ts",
   "author": "Zero",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "@zodash/crypto": "^0.0.3",
     "@zodash/delay": "^0.0.11",
     "@zodash/format": "^1.0.1-alpha.11",
+    "@zodash/shorturl": "^0.2.5",
     "@zodash/uuid": "^0.0.3",
     "basic-auth": "^2.0.1"
   }
