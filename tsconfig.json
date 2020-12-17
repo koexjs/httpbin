@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "esnext",
+    "sourceMap": false,
+    "lib": [
+      "es2018"
+    ],
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@koex/*": ["packages/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "lib",
+    "__tests__",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ],
+  "include": [
+    "."
+  ]
+ }
