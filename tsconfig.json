@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "declaration": true,
+    "declaration": false,
     "noImplicitAny": false,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -12,6 +12,7 @@
       "es2018"
     ],
     "resolveJsonModule": true,
+    "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
       "@koex/*": ["packages/*"]
@@ -25,6 +26,6 @@
     "**/*.test.ts"
   ],
   "include": [
-    "."
+    "src"
   ]
  }

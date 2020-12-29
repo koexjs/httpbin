@@ -7,12 +7,14 @@
   "private": true,
   "scripts": {
     "build": "tsc -p tsconfig.prod.json",
-    "dev": "ts-node -r tsconfig-paths/register index.ts",
+    "dev": "tsc-watch -p tsconfig.json --onSuccess \"node dist/index.js\"",
     "prod": "node dist/index.js"
   },
   "devDependencies": {
     "@types/node": "^12.7.5",
+    "@types/pdfjs-dist": "^2.1.7",
     "ts-node": "^9.1.1",
+    "tsc-watch": "^4.2.9",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.6.3"
   },
@@ -20,6 +22,7 @@
     "@koex/body": "^0.0.8",
     "@koex/core": "^0.10.0",
     "@koex/cors": "^0.0.2",
+    "@koex/static": "^0.13.2",
     "@types/basic-auth": "^1.1.2",
     "@zodash/crypto": "^0.0.3",
     "@zodash/delay": "^0.0.11",

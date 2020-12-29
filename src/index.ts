@@ -1,10 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as url from 'url';
 
 import App from '@koex/core';
 import body from '@koex/body';
 import cors from '@koex/cors';
+import statics from '@koex/static';
 import { uuid } from '@zodash/uuid';
 import { delay } from '@zodash/delay';
 import { format } from '@zodash/format';
@@ -15,7 +15,9 @@ import { md5 } from '@zodash/crypto/lib/md5';
 import * as aes from '@zodash/crypto/lib/aes';
 
 import shorturl from '@zodash/shorturl';
-import { createProxy } from '@zoproxy/batch';
+
+import proxy from './app/proxy';
+import pdf from './app/pdf';
 
 
 // declare module '@koex/core' {
@@ -64,6 +66,10 @@ const stat = (filepath: string): Promise<fs.Stats> => new Promise((resolve, reje
   });
 });
 
+app.use(statics('/static', {
+  dir: path.join(__dirname, '../static'),
+}))
+
 app.use(cors());
 
 app.use(async function error(ctx, next) {
@@ -87,7 +93,7 @@ app.use(async function json(ctx, next) {
 
 app.use(async function render(ctx, next) {
   ctx.render = async <T>(viewpath: string, context?: T) => {
-    return new Promise<T>((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const absoluteFilePath = path.join(process.cwd(), viewpath);
       fs.readFile(absoluteFilePath, (err, text) => {
         if (err) {
@@ -627,44 +633,9 @@ app.post('/shorturl', async (ctx) => {
 });
 
 // @TODO
-app.all('/proxy', async (ctx) => {
-  if (!ctx.query.url) {
-    ctx.throw(400, {
-      code: 4001090,
-      message: 'url is required',
-    });
-  }
+app.all('/proxy', proxy);
 
-  const _url = url.parse(ctx.query.url);
-
-  const proxy = createProxy({
-    table: {
-      '(.*)': {
-        target: `${_url.protocol}//${_url.host}`,
-        pathRewrite: {
-          '(.*)': _url.path,
-        },
-      },
-    },
-    
-  });
-
-  const { response } = await proxy({
-    path: ctx.path,
-    method: ctx.method,
-    headers: ctx.headers,
-    query: ctx.querystring,
-    body: JSON.stringify((ctx.request as any).body),
-    files: (ctx.request as any).files,
-  });
-
-  response.headers.delete('content-security-policy');
-  ctx.set(response.headers.raw() as any);
-  ctx.set('access-control-allow-origin', '*');
-  ctx.set('access-control-expose-headers', 'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, Deprecation, Sunset');
-  ctx.staus = response.status;
-  ctx.body = response.body;
-});
+app.get('/pdf-viewer', pdf);
 
 const port = +process.env.PORT || 8080;
 
