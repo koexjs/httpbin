@@ -5,20 +5,32 @@ import App from '@koex/core';
 import body from '@koex/body';
 import cors from '@koex/cors';
 import statics from '@koex/static';
-import { uuid } from '@zodash/uuid';
-import { delay } from '@zodash/delay';
+
 import { format } from '@zodash/format';
-import * as basicAuth from 'basic-auth';
 
-import * as base64 from '@zodash/crypto/lib/base64';
-import { md5 } from '@zodash/crypto/lib/md5';
-import * as aes from '@zodash/crypto/lib/aes';
+import health from './app/health';
+import * as request from './app/request';
+import cookies from './app/cookies';
+import cache from './app/cache';
+import etag from './app/etag';
+import * as auth from './app/auth';
+import ip from './app/ip';
 
-import shorturl from '@zodash/shorturl';
+import delay from './app/delay';
+import uuid from './app/uuid';
+import base64 from './app/base64';
+import md5 from './app/md5';
+import aes from './app/aes';
 
-import proxy from './app/proxy';
+import image from './app/image';
 import pdf from './app/pdf';
 
+import upload from './app/upload';
+
+import jsonp from './app/jsonp';
+import proxy from './app/proxy';
+import shorturl from './app/shorturl';
+import pdfViewer from './app/pdf-viewer';
 
 // declare module '@koex/core' {
 //   interface Request {
@@ -158,9 +170,7 @@ app.use(async (ctx, next) => {
   ctx.logger.debug(`<= [${new Date().toUTCString()}] ${ctx.method} ${ctx.originalUrl} ${ctx.status} ${time.end()}ms`);
 });
 
-app.get('/health', async (ctx) => {
-  ctx.status = 200;
-});
+app.get('/health', health);
 
 app.get('/', async (ctx) => {
   ctx.body = 'hello, world';
@@ -169,341 +179,105 @@ app.get('/', async (ctx) => {
 /**
  * Returns the requester's IP address.
  */
-app.get('/ip', async (ctx) => {
-  await ctx.json({
-    ip: ctx.ip,
-    ips: ctx.ips,
-  });
-});
+app.get('/ip', ip);
 
 /**
  * Return a UUID4
  */
-app.get('/uuid', async (ctx) => {
-  await ctx.json({
-    uuid: uuid(),
-  });
-});
+app.get('/uuid', uuid);
 
 /**
  * Return the incoming request's HTTP Headers.
  */
-app.get('/headers', async (ctx) => {
-  await ctx.json({
-    headers: ctx.headers,
-  });
-});
+app.get('/headers', request.headers);
 
 /**
  * Return the incoming requests's User-Agent Header
  */
-app.get('/user-agent', async (ctx) => {
-  await ctx.json({
-    'user-agent': ctx.get('user-agent'),
-  });
-});
+app.get('/user-agent', request.userAgent);
 
 /**
  * The request's GET parameters
  */
-app.get('/get', async (ctx) => {
-  await ctx.json({
-    method: ctx.method,
-    url: ctx.url,
-    query: ctx.query,
-    params: ctx.params,
-    headers: ctx.headers,
-    origin: ctx.origin,
-  });
-});
+app.get('/get', request.get);
 
 /**
  * The requests's POST parameters
  */
-app.post('/post', async (ctx) => {
-  await ctx.json({
-    method: ctx.method,
-    url: ctx.url,
-    query: ctx.query,
-    params: ctx.params,
-    body: ctx.request.body,
-    files: ctx.files,
-    headers: ctx.headers,
-    origin: ctx.origin,
-  });
-});
+app.post('/post', request.post);
 
 /**
  * The requests's PUT parameters
  */
-app.put('/put', async (ctx) => {
-  await ctx.json({
-    method: ctx.method,
-    url: ctx.url,
-    query: ctx.query,
-    params: ctx.params,
-    body: ctx.request.body,
-    files: ctx.files,
-    headers: ctx.headers,
-    origin: ctx.origin,
-  });
-});
+app.put('/put', request.put);
 
 /**
  * The requests's PATCH parameters
  */
-app.patch('/patch', async (ctx) => {
-  await ctx.json({
-    method: ctx.method,
-    url: ctx.url,
-    query: ctx.query,
-    params: ctx.params,
-    body: ctx.request.body,
-    files: ctx.files,
-    headers: ctx.headers,
-    origin: ctx.origin,
-  });
-});
+app.patch('/patch', request.patch);
 
 /**
  * The requests's DELETE parameters
  */
-app.del('/delete', async (ctx) => {
-  await ctx.json({
-    method: ctx.method,
-    url: ctx.url,
-    query: ctx.query,
-    params: ctx.params,
-    body: ctx.request.body,
-    files: ctx.files,
-    headers: ctx.headers,
-    origin: ctx.origin,
-  });
-});
+app.del('/delete', request.del);
 
-app.get('/cookie', async (ctx) => {
-  await ctx.json({
-    cookie: ctx.get('cookie'),
-  });
-});
+app.get('/cookie', cookies.raw);
 
-app.get('/cookie/set/:name/:value', async (ctx) => {
-  ctx.cookies.set(ctx.params.name, ctx.params.value);
+app.get('/cookie/set/:name/:value', cookies.set);
 
-  await ctx.json({
-    setCookie: ctx.params,
-  });
-});
+app.get('/cookie/get/:name', cookies.get);
 
-app.get('/cookie/get/:name', async (ctx) => {
-  await ctx.json({
-    getCookie: {
-      name: ctx.params.name,
-      value: ctx.cookies.get(ctx.params.name),
-    },
-  });
-});
+app.get('/cookie/delete/:name', cookies.del);
 
 /**
  * Prompt the user for authorization using HTTP Basic Auth
  */
-app.get('/basic-auth/:username/:password', async (ctx) => {
-  const user = basicAuth(ctx.req);
-  const { username, password } = ctx.params;
-
-  if (!user || user.name !== username || user.pass !== password) {
-    return ctx.throw(401, null, {
-      headers: {
-        'WWW-Authenticate': `Basic realm="Secure Area"`,
-        'user': user && user.name,
-        'pass': user && user.pass, 
-      },
-    });
-  }
-
-  await ctx.json({
-    'basic-auth': {
-      headers: ctx.headers,
-      authorization: ctx.get('authorization'),
-      username: user.name,
-      password: user.pass,
-    },
-  });
-});
+app.get('/basic-auth/:username/:password', auth.basic);
 
 /**
  * Prompts the user for authorization using bearer authentication
  */
-app.get('/bearer', async (ctx) => {
-  const authorization = ctx.get('Authorization');
-  if (!(authorization && authorization.startsWith('Bearer '))) {
-    return ctx.throw(401, null, {
-      headers: {
-        'WWW-Authenticate': 'Bearer',
-      },
-    });
-  }
-
-  const token = /^Bearer\s(\w+)/.exec(authorization)[1]
-
-  await ctx.json({
-    authenticated: true,
-    token,
-  });
-});
+app.get('/bearer', auth.bearer);
 
 /**
  * Returns a delayed response (max of 10 seconds).
  */
-app.get('/delay/:delay', async (ctx) => {
-  const ms = +ctx.params.delay || 0;
-  await delay(ms);
-  await ctx.json({
-    method: ctx.method,
-    url: ctx.url,
-    query: ctx.query,
-    params: ctx.params,
-    body: ctx.request.body,
-    files: ctx.files,
-    headers: ctx.headers,
-    origin: ctx.origin,
-  });
-});
+app.get('/delay/:delay', delay);
 
 /**
  * Base64 encode
  */
-app.get('/base64/encode/:value', async (ctx) => {
-  const value = ctx.params.value;
-
-  await ctx.json({
-    [value]: base64.encode(value),
-  });
-});
+app.get('/base64/encode/:value', base64.encode);
 
 /**
  * Base64 decode
  */
-app.get('/base64/decode/:value', async (ctx) => {
-  const value = ctx.params.value;
-
-  await ctx.json({
-    [value]: base64.decode(value),
-  });
-});
+app.get('/base64/decode/:value', base64.decode);
 
 /**
  * MD5
  */
-app.get('/md5/:value', async (ctx) => {
-  const value = ctx.params.value;
-
-  await ctx.json({
-    [value]: md5(value),
-  });
-});
-
-/**
- * MD5
- */
-app.get('/md5/:value', async (ctx) => {
-  const value = ctx.params.value;
-
-  await ctx.json({
-    [value]: md5(value),
-  });
-});
+app.get('/md5/:value', md5);
 
 /**
  * AES encrypt
  */
-app.get('/aes/encrypt/:algorithm/:iv/:key/:value', async (ctx) => {
-  const {
-    algorithm,
-    iv,
-    key,
-    value,
-  } = ctx.params;
-
-  await ctx.json({
-    algorithm,
-    iv,
-    key,
-    value,
-    encrypedValue: aes.encrypt(algorithm, key, iv, value),
-  });
-});
+app.get('/aes/encrypt/:algorithm/:iv/:key/:value', aes.encrypt);
 
 /**
  * AES decrypt
  */
-app.get('/aes/decrypt/:algorithm/:iv/:key/:value', async (ctx) => {
-  const {
-    algorithm,
-    iv,
-    key,
-    value,
-  } = ctx.params;
-
-  await ctx.json({
-    algorithm,
-    iv,
-    key,
-    value,
-    decrypedValue: aes.decrypt(algorithm, key, iv, value),
-  });
-});
+app.get('/aes/decrypt/:algorithm/:iv/:key/:value', aes.decrypt);
 
 /**
  * Return a 304 if an If-Modified-Since header or If-None-Match is present. Returns the same as a GET otherwise.
  */
-app.get('/cache', async (ctx) => {
-  const isConditional = ctx.get('If-Modified-Since') || ctx.get('If-None-Match');
-
-  if (!isConditional) {
-    const lastModified = new Date().toUTCString();
-    const etag = base64.encode(uuid()); // @TODO
-    ctx.set('Last-Modified', lastModified);
-    ctx.set('ETag', etag);
-    return await ctx.json({
-      lastModified,
-      etag,
-    });
-  }
-
-  ctx.status = 304;
-});
+app.get('/cache', cache);
 
 /**
  * Assumes the resource has the given etag and responds to If-None-Match and If-Match headers appropriately.
  */
-app.get('/etag/:etag', async (ctx) => {
-  const etag = ctx.params.etag;
-  const IfNoneMatch = ctx.get('If-None-Match');
-  const IfMatch = ctx.get('If-Match');
-  
-  if (IfNoneMatch) {
-    if (etag === IfNoneMatch) {
-      ctx.status = 304;
-      ctx.set('Etag', etag);
-      return await ctx.json({
-        status: 304,
-        etag,
-      });
-    }
-  } else if (IfMatch) {
-    if (etag != IfMatch) {
-      ctx.status = 412;
-      return ;
-    }
-  }
-
-  ctx.set('ETag', etag);
-  await ctx.json({
-    status: 200,
-    etag,
-  });
-});
+app.get('/etag/:etag', etag);
 
 app.get('/cache/:value', async (ctx) => {
   const value = +ctx.params.value || 0;
@@ -516,126 +290,52 @@ app.get('/cache/:value', async (ctx) => {
 /**
  * Returns a simple image of the type suggest by the Accept header.
  */
-app.get('/image', async (ctx) => {
-  if (ctx.accepts('image/webp')) {
-    ctx.type = 'image/webp';
-    return await ctx.resource('./static/images/wolf_1.webp', 'image/webp');
-  } else if (ctx.accepts('image/svg+xml')) {
-    return await ctx.resource('./static/images/svg_logo.svg', 'image/svg+xml');
-  } else if (ctx.accepts('image/jpeg')) {
-    return await ctx.resource('./static/images/jackal.jpg', 'image/jpeg');
-  } else if (ctx.accepts('image/png')) {
-    return await ctx.resource('./static/images/pig_icon.png', 'image/png');
-  } else {
-    ctx.status = 406; // Unsupported media type
-  }
-});
+app.get('/image', image.auto);
 
 /**
  * Returns a simple image of the type suggest by the Accept header.
  * 
  * using post
  */
-app.post('/image', async (ctx) => {
-  if (ctx.accepts('image/webp')) {
-    return await ctx.resource('./static/images/wolf_1.webp', 'image/webp');
-  } else if (ctx.accepts('image/svg+xml')) {
-    return await ctx.resource('./static/images/svg_logo.svg', 'image/svg+xml');
-  } else if (ctx.accepts('image/jpeg')) {
-    return await ctx.resource('./static/images/jackal.jpg', 'image/jpeg');
-  } else if (ctx.accepts('image/png')) {
-    return await ctx.resource('./static/images/pig_icon.png', 'image/png');
-  } else {
-    ctx.status = 406; // Unsupported media type
-  }
-});
+app.post('/image', image.auto);
 
 /**
  * Returns a simple WEBP image.
  */
-app.get('/image/webp', async (ctx) => {
-  return await ctx.resource('./static/images/wolf_1.webp', 'image/webp');
-});
+app.get('/image/webp', image.webp);
 
 /**
  * Returns a simple SVG image.
  */
-app.get('/image/svg', async (ctx) => {
-  return await ctx.resource('./static/images/svg_logo.svg', 'image/svg+xml');
-});
+app.get('/image/svg', image.svg);
 
 /**
  * Returns a simple JPEG image.
  */
-app.get('/image/jpeg', async (ctx) => {
-  return await ctx.resource('./static/images/jackal.jpg', 'image/jpeg');
-});
+app.get('/image/jpeg', image.jpeg);
 
 /**
  * Returns a simple PNG image.
  */
-app.get('/image/png', async (ctx) => {
-  return await ctx.resource('./static/images/pig_icon.png', 'image/png');
-});
+app.get('/image/png', image.png);
 
-app.get('/pdf', async (ctx) => {
-  await ctx.resource('./static/pdfs/img.jpeg.pdf', 'application/pdf');
-});
+app.get('/pdf', pdf);
 
-app.post('/pdf', async (ctx) => {
-  await ctx.resource('./static/pdfs/img.jpeg.pdf', 'application/pdf');
-});
+app.post('/pdf', pdf);
 
-app.get('/upload', async (ctx) => {
-  await ctx.render('./view/upload.html', {
-    title: 'Upload',
-  });
-});
+app.get('/upload', upload.get);
 
-app.post('/upload', async (ctx) => {
-  console.log(ctx.request.files);
-  await ctx.json({
-    method: ctx.method,
-    url: ctx.url,
-    query: ctx.query,
-    params: ctx.params,
-    body: ctx.request.body,
-    files: ctx.request.files,
-    headers: ctx.headers,
-    origin: ctx.origin,
-  });
-});
+app.post('/upload', upload.post);
 
 // jsonp
-app.get('/jsonp', async (ctx) => {
-  const { callback } = ctx.query;
+app.get('/jsonp', jsonp);
 
-  const data = {
-    code: 200,
-    message: null,
-    result: {
-      name: 'jsonp method',
-      callback,
-      message: 'You have made a successful jsonp call.',
-    },
-  };
-
-  ctx.body = `${callback}(${JSON.stringify(data)})`;
-});
-
-app.post('/shorturl', async (ctx) => {
-  const { url } = ctx.request.body;
-
-  ctx.body = {
-    url,
-    shorturl: shorturl(url),
-  };
-});
+app.post('/shorturl', shorturl);
 
 // @TODO
 app.all('/proxy', proxy);
 
-app.get('/pdf-viewer', pdf);
+app.get('/pdf-viewer', pdfViewer);
 
 const port = +process.env.PORT || 8080;
 
