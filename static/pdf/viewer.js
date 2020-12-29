@@ -100,8 +100,13 @@ function loadPDF(fileURL) {
 }
 
 const DEMO_PDF = '/static/pdf/git.pdf';
-const pdfUrl = new URLSearchParams(window.location.search)
+let pdfUrl = new URLSearchParams(window.location.search)
   .get('url') || DEMO_PDF;
+
+// proxy outer url
+if (!pdfUrl.startsWith('/')) {
+  pdfUrl = `/proxy?url=${encodeURIComponent(url)}`;
+}
 
 loadPDF(pdfUrl)
   .then(pdf => {
