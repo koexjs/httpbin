@@ -5,6 +5,7 @@ import * as url from 'url';
 import App from '@koex/core';
 import body from '@koex/body';
 import cors from '@koex/cors';
+import statics from '@koex/static';
 import { uuid } from '@zodash/uuid';
 import { delay } from '@zodash/delay';
 import { format } from '@zodash/format';
@@ -16,6 +17,8 @@ import * as aes from '@zodash/crypto/lib/aes';
 
 import shorturl from '@zodash/shorturl';
 import { createProxy } from '@zoproxy/batch';
+
+import pdf from './app/pdf';
 
 
 // declare module '@koex/core' {
@@ -64,6 +67,10 @@ const stat = (filepath: string): Promise<fs.Stats> => new Promise((resolve, reje
   });
 });
 
+app.use(statics('/static', {
+  dir: path.join(__dirname, '../static'),
+}))
+
 app.use(cors());
 
 app.use(async function error(ctx, next) {
@@ -87,7 +94,7 @@ app.use(async function json(ctx, next) {
 
 app.use(async function render(ctx, next) {
   ctx.render = async <T>(viewpath: string, context?: T) => {
-    return new Promise<T>((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const absoluteFilePath = path.join(process.cwd(), viewpath);
       fs.readFile(absoluteFilePath, (err, text) => {
         if (err) {
@@ -646,7 +653,6 @@ app.all('/proxy', async (ctx) => {
         },
       },
     },
-    
   });
 
   const { response } = await proxy({
@@ -665,6 +671,8 @@ app.all('/proxy', async (ctx) => {
   ctx.staus = response.status;
   ctx.body = response.body;
 });
+
+app.get('/pdf-viewer', pdf);
 
 const port = +process.env.PORT || 8080;
 
