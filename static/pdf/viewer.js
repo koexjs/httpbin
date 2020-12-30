@@ -105,7 +105,7 @@ let pdfUrl = new URLSearchParams(window.location.search)
 
 // proxy outer url
 if (!pdfUrl.startsWith('/')) {
-  pdfUrl = `/proxy?url=${encodeURIComponent(url)}`;
+  pdfUrl = `/proxy?url=${encodeURIComponent(pdfUrl)}`;
 }
 
 loadPDF(pdfUrl)
