@@ -2,6 +2,8 @@
 
 const PDFJS = pdfjsLib;
 
+PDFJS.GlobalWorkerOptions.workerSrc = '/static/pdf/lib/pdf.worker.js';
+
 function createSeriesCanvas(num, template) {
   var id = '';
   for (var page = 1; page <= num; page++) {
