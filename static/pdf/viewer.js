@@ -13,23 +13,40 @@ function createSeriesCanvas(num, template) {
 }
 
 async function renderPageContainer(currentPage, totalPage) {
-  var pdfContainer = document.getElementById('viewer');
+  var id = `page-${currentPage}`;
+  var pageContainer = document.getElementById(id);
 
-  var pageContainer = document.createElement('div');
-  pageContainer.className = `page page-${currentPage}`;
-  pageContainer.style.display = 'flex';
-  pageContainer.style.justifyContent = 'center';
+  if (!pageContainer) {
+    var pdfContainer = document.getElementById('viewer');
 
-  pdfContainer.appendChild(pageContainer);
+    pageContainer = document.createElement('div');
+    pageContainer.className = `page ${id}`;
+    pageContainer.id = id;
+    // pageContainer.style.display = 'flex';
+    // pageContainer.style.justifyContent = 'center';
+
+    pdfContainer.appendChild(pageContainer);
+  } else {
+    for (const element of pageContainer.children) {
+      pageContainer.removeChild(element);
+    }
+  }
 
   return pageContainer;
 }
 
 async function renderPageCanvas(pageContainer, pdf, currentPage, totalPage) {
-  var canvas = document.createElement('canvas');
-  canvas.className = `canvas`;
-  canvas.setAttribute('page', currentPage);
-  pageContainer.appendChild(canvas);
+  var id = `page-canvas-${currentPage}`;
+  var canvas = document.getElementById(id);
+
+  if (canvas) {
+    pageContainer.removeChild(canvas);
+  }
+
+  canvas = document.createElement('canvas');
+    canvas.className = `canvas`;
+    canvas.id = id;
+    pageContainer.appendChild(canvas);
 
   var pdfPage = await pdf.getPage(currentPage);
 
@@ -63,13 +80,22 @@ async function renderPageCanvas(pageContainer, pdf, currentPage, totalPage) {
     });
 }
 
-async function renderPageTextLayer(pageContainer, pageCanvas, textContent, viewport) {
-  const textLayerDiv = document.createElement('div');
+async function renderPageTextLayer(pageContainer, pageCanvas, currentPage, totalPage, textContent, viewport) {
+  var id = `page-text-${currentPage}`;
+  var textLayerDiv = document.getElementById(id);
+  
+
+  if (textLayerDiv) {
+    pageContainer.removeChild(textLayerDiv);
+  }
+
+  textLayerDiv = document.createElement('div');
   textLayerDiv.className = 'textLayer';
+  textLayerDiv.id = id;
+  pageContainer.appendChild(textLayerDiv);
+
   textLayerDiv.style.width = `${pageCanvas.width}px`;
   textLayerDiv.style.height = `${pageCanvas.height}px`;
-
-  pageContainer.appendChild(textLayerDiv);
 
   return pdfjsLib
     .renderTextLayer({
@@ -82,7 +108,7 @@ async function renderPageTextLayer(pageContainer, pageCanvas, textContent, viewp
 async function renderPage(pdf, currentPage, totalPage) {
   const pageContainer = await renderPageContainer(currentPage, totalPage);
   const { pageCanvas, textContent, viewport } = await renderPageCanvas(pageContainer, pdf, currentPage, totalPage);
-  const pageTextLayer = await renderPageTextLayer(pageContainer, pageCanvas, textContent, viewport);
+  const pageTextLayer = await renderPageTextLayer(pageContainer, pageCanvas, currentPage, totalPage, textContent, viewport);
 
 }
 
@@ -101,6 +127,21 @@ function loadPDF(fileURL) {
     .promise;
 }
 
+function debounce(fn) {
+  var it;
+
+  return () => {
+    if (it) {
+      clearTimeout(it);
+      it = null;
+    }
+
+    it = setTimeout(() => {
+      fn.call(null);
+    }, 250);
+  };
+}
+
 const DEMO_PDF = '/static/pdf/git.pdf';
 let pdfUrl = new URLSearchParams(window.location.search)
   .get('url') || DEMO_PDF;
@@ -112,5 +153,11 @@ if (!pdfUrl.startsWith('/')) {
 
 loadPDF(pdfUrl)
   .then(pdf => {
+    
+    window.addEventListener('resize', debounce(() => {
+      console.log('onResize');
+      renderPDF(pdf);
+    }));
+
     return renderPDF(pdf);
   });

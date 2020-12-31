@@ -15,3 +15,8 @@ body {
   max-width: 950px;
   margin: 0 auto;
 }
+
+#viewContainer .page {
+  display: flex;
+  justify-content: center;
+}
