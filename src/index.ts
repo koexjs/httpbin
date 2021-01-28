@@ -32,6 +32,9 @@ import proxy from './app/proxy';
 import shorturl from './app/shorturl';
 import pdfViewer from './app/pdf-viewer';
 
+import mail from './app/email';
+import email from './app/email';
+
 // declare module '@koex/core' {
 //   interface Request {
 //       body: any;
@@ -165,9 +168,9 @@ app.use(body({
 
 app.use(async (ctx, next) => {
   time.start();
-  ctx.logger.debug(`=> [${new Date().toUTCString()}] ${ctx.method} ${ctx.originalUrl}`);
+  ctx.logger.info(`=> ${ctx.method} ${ctx.originalUrl}`);
   await next();
-  ctx.logger.debug(`<= [${new Date().toUTCString()}] ${ctx.method} ${ctx.originalUrl} ${ctx.status} ${time.end()}ms`);
+  ctx.logger.info(`<= ${ctx.method} ${ctx.originalUrl} ${ctx.status} ${time.end()}ms`);
 });
 
 app.get('/health', health);
@@ -336,6 +339,8 @@ app.post('/shorturl', shorturl);
 app.all('/proxy', proxy);
 
 app.get('/pdf-viewer', pdfViewer);
+
+app.post('/email', email);
 
 const port = +process.env.PORT || 8080;
 
