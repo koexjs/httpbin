@@ -314,7 +314,7 @@
 
 "@zodash/mail@^0.0.2":
   version "0.0.2"
-  resolved "https://npm.zhonganinfo.com/@zodash%2fmail/-/mail-0.0.2.tgz#7c4af5b246a85793af3c57ac2e4ffec0128b22f0"
+  resolved "https://registry.npm.taobao.org/@zodash/mail/download/@zodash/mail-0.0.2.tgz#7c4af5b246a85793af3c57ac2e4ffec0128b22f0"
   integrity sha1-fEr1skaoV5OvPFesLk/+wBKLIvA=
   dependencies:
     nodemailer "^6.4.17"
