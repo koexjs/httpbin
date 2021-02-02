@@ -24,6 +24,7 @@
     "@koex/cors": "^0.0.2",
     "@koex/static": "^0.13.2",
     "@types/basic-auth": "^1.1.2",
+    "@zodash/captcha": "^0.0.4",
     "@zodash/crypto": "^0.0.3",
     "@zodash/delay": "^0.0.11",
     "@zodash/format": "^1.0.1-alpha.11",

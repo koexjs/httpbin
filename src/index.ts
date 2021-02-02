@@ -32,8 +32,8 @@ import proxy from './app/proxy';
 import shorturl from './app/shorturl';
 import pdfViewer from './app/pdf-viewer';
 
-import mail from './app/email';
 import email from './app/email';
+import captcha from './app/captcha';
 
 // declare module '@koex/core' {
 //   interface Request {
@@ -91,9 +91,11 @@ app.use(async function error(ctx, next) {
   try {
     await next();
   } catch (err) {
+    ctx.status = err.status || 500;
+
     ctx.json({
-      errcode: err.code || err.status || 500,
-      errmessage: !env.prod ? err.message : 'Internal Server Error',
+      code: err.code || err.status || 500,
+      message: err.message, // !env.prod ? err.message : 'Internal Server Error',
     });
   }
 });
@@ -341,6 +343,10 @@ app.all('/proxy', proxy);
 app.get('/pdf-viewer', pdfViewer);
 
 app.post('/email', email);
+
+app.get('/captcha/:token', captcha.view);
+app.post('/captcha/generate', captcha.generate);
+app.post('/captcha/validate', captcha.validate);
 
 const port = +process.env.PORT || 8080;
 
