@@ -35,6 +35,9 @@ import pdfViewer from './app/pdf-viewer';
 import email from './app/email';
 import captcha from './app/captcha';
 
+import ws from './app/ws';
+import socketio from './app/socket.io';
+
 // declare module '@koex/core' {
 //   interface Request {
 //       body: any;
@@ -57,6 +60,12 @@ declare module '@koex/core' {
 }
 
 const app = new App();
+
+app.use(async (ctx, next) => {
+  await next();
+
+  console.log('xxx:', ctx.response.header);
+});
 
 const env = {
   value: process.env.NODE_ENV,
@@ -350,6 +359,10 @@ app.post('/captcha/validate', captcha.validate);
 
 const port = +process.env.PORT || 8080;
 
-app.listen(port, '0.0.0.0', () => {
+const server = app.listen(port, '0.0.0.0', () => {
   console.log(`server start at http://127.0.0.1:${port}.`);
 });
+
+
+ws('/ws', server);
+socketio('/socket.io', server);

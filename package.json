@@ -13,6 +13,8 @@
   "devDependencies": {
     "@types/node": "^12.7.5",
     "@types/pdfjs-dist": "^2.1.7",
+    "@types/socket.io": "^2.1.13",
+    "@types/ws": "^7.4.0",
     "ts-node": "^9.1.1",
     "tsc-watch": "^4.2.9",
     "tsconfig-paths": "^3.9.0",
@@ -32,6 +34,8 @@
     "@zodash/shorturl": "^0.2.5",
     "@zodash/uuid": "^0.0.3",
     "@zoproxy/batch": "^0.0.36",
-    "basic-auth": "^2.0.1"
+    "basic-auth": "^2.0.1",
+    "socket.io": "^3.1.0",
+    "ws": "^7.4.2"
   }
 }
