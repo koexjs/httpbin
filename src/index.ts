@@ -38,6 +38,8 @@ import captcha from './app/captcha';
 import ws from './app/ws';
 import socketio from './app/socket.io';
 
+import imagemin from './app/imagemin';
+
 // declare module '@koex/core' {
 //   interface Request {
 //       body: any;
@@ -125,7 +127,10 @@ app.use(async function render(ctx, next) {
         if (err) {
           reject(err);
         }
-        ctx.body = format(text.toString(), context);
+        ctx.body = format(text.toString(), context, {
+          start: '{{',
+          end: '}}',
+        });
         resolve();
       });
     });
@@ -136,7 +141,7 @@ app.use(async function render(ctx, next) {
 
 app.use(async function resource(ctx, next) {
   ctx.resource = async (filepath: string, contentType: string) => {
-    const absoluteFilePath = path.join(process.cwd(), filepath);
+    const absoluteFilePath = /^\//.test(filepath) ? filepath : path.join(process.cwd(), filepath);
 
     // secure
     ctx.set('X-Content-Type-Options', 'nosniff');
@@ -363,6 +368,9 @@ const server = app.listen(port, '0.0.0.0', () => {
   console.log(`server start at http://127.0.0.1:${port}.`);
 });
 
+app.post('/image/minify', imagemin.create);
+app.get('/image/minify', imagemin.get);
+app.get('/image/minify/:id', imagemin.get);
 
 ws('/ws', server);
 socketio('/socket.io', server);

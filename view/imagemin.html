@@ -1,0 +1,95 @@
+<!doctype html>
+    <html>
+      <head>
+        <title>{{title}}</title>
+        <style>
+          body {
+            width: 100vw;
+            height: 100vh;
+          }
+
+          .boards {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+          }
+
+          .result {
+            width: 100%;
+            padding: 20px;
+          }
+
+          .card {
+            padding: 10px;
+          }
+
+          form {
+            
+          }
+
+          form input {
+            box-sizing: border-box;
+            width: 100%;
+            height: 32px;
+            line-height: 32px;
+            border-radius: 3px;
+            outline: none;
+            border: 1px solid #ccc;
+            margin-bottom: 6px;
+            padding: 0 10px;
+          }
+
+          button {
+            box-sizing: border-box;
+            width: 100%;
+            height: 32px;
+            margin-bottom: 6px;
+            padding: 0 10px;
+            outline: none;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="boards">
+          <div class="card ajax-form">
+            <form>
+              <input
+                type="file"
+                name="file"
+                multiple="multiple"
+              ><br>
+            </form>
+          </div>
+        </div>
+        <div class="result">
+          <pre></pre>
+        </div>
+        <script>
+          const $file = document.querySelector('.ajax-form input[name="file"]');
+          const $result = document.querySelector('.result pre');
+
+          $file.addEventListener('change', function (event) {
+            const files = event.target.files;
+
+            const data = new FormData();
+            data.append('file', files[0]);
+
+            fetch('/image/minify', {
+              method: 'POST',
+              // headers: {
+              //   'Content-Type': 'form-data',
+              // },
+              body: data,
+            })
+              .then(res => res.json())
+              .then(json => {
+                $result.innerHTML = JSON.stringify(json, null, 2);
+              })
+              .finally(() => {
+                event.target.value = '';
+              });
+          });
+        </script>
+      </body>
+    </html>
