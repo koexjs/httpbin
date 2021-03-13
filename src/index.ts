@@ -102,6 +102,8 @@ app.use(async function error(ctx, next) {
   try {
     await next();
   } catch (err) {
+    console.error(err);
+    //
     ctx.status = err.status || 500;
 
     ctx.json({
@@ -145,6 +147,13 @@ app.use(async function resource(ctx, next) {
 
     // secure
     ctx.set('X-Content-Type-Options', 'nosniff');
+
+    try {
+      await fs.promises.access(absoluteFilePath);
+    } catch (error) {
+      ctx.status = 404;
+      return ;
+    }
 
     // fs.stat
     const stats = await stat(absoluteFilePath);

@@ -12,8 +12,12 @@
   },
   "devDependencies": {
     "@types/imagemin": "^7.0.0",
+    "@types/imagemin-gifsicle": "^7.0.0",
     "@types/imagemin-jpegtran": "^5.0.0",
+    "@types/imagemin-mozjpeg": "^8.0.0",
     "@types/imagemin-pngquant": "^8.0.0",
+    "@types/imagemin-svgo": "^8.0.1",
+    "@types/imagemin-webp": "^5.1.1",
     "@types/node": "^12.7.5",
     "@types/pdfjs-dist": "^2.1.7",
     "@types/socket.io": "^2.1.13",
@@ -39,9 +43,14 @@
     "@zoproxy/batch": "^0.0.36",
     "basic-auth": "^2.0.1",
     "imagemin": "^7.0.1",
+    "imagemin-gifsicle": "^7.0.0",
     "imagemin-jpegtran": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
     "imagemin-pngquant": "^9.0.2",
+    "imagemin-svgo": "^9.0.0",
+    "imagemin-webp": "^6.0.0",
     "socket.io": "^3.1.0",
+    "svgo": "^2.2.2",
     "ws": "^7.4.2"
   }
 }

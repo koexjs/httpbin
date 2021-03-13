@@ -5,17 +5,34 @@ import { join, extname } from 'path';
 import * as imagemin from 'imagemin';
 import * as imageminJpegtran from 'imagemin-jpegtran';
 import imageminPngquant from 'imagemin-pngquant';
+import * as imageminSvgo from 'imagemin-svgo';
+import * as imageminGifsicle from 'imagemin-gifsicle';
+import * as imageminMozjpeg from 'imagemin-mozjpeg';
+import * as imageminWebp from 'imagemin-webp';
+
+const { extendDefaultPlugins } = require('svgo');
 
 const CLEAN_TIMEOUT = 30 * 60 * 1000;
 
-async function compress(filepath: string) {
+async function compress(filepath: string, quality: number = 75) {
   const files = await imagemin([filepath], {
 		destination: join(os.tmpdir(), 'imagemin'),
 		plugins: [
-			imageminJpegtran(),
+      imageminGifsicle(),
+			imageminMozjpeg({
+        quality,
+      }),
 			imageminPngquant({
-				quality: [0.6, 0.8],
-			})
+				quality: [0.1, quality / 100],
+			}),
+      imageminSvgo({
+        plugins: extendDefaultPlugins([
+          { name: 'removeViewBox', active: false },
+        ]),
+      }),
+      imageminWebp({
+        quality,
+      }),
 		]
 	});
 
@@ -43,6 +60,7 @@ function schedulerClean(source: string, target: string) {
 }
 
 export async function create(ctx: Context) {
+  const quality = +ctx.query.quality || 75;
   const sourceFile = ctx.request.files['file'];
   if (!sourceFile) {
     ctx.throw(400, {
@@ -56,7 +74,7 @@ export async function create(ctx: Context) {
   const id = hash;
 
   try {
-    const targetPath = await compress(sourcePath);
+    const targetPath = await compress(sourcePath, quality);
 
     const key = `imagemin/${id}`;
     ctx.cache.set(key, { name, type, sourcePath, targetPath });
@@ -92,8 +110,16 @@ export async function get(ctx: Context) {
   }
 
   const key = `imagemin/${id}`;
-  const { type, targetPath } = ctx.cache.get(key) || {};
+  const file = ctx.cache.get(key);
+  if (!file) {
+    ctx.status = 404;
+    return ctx.throw(404, {
+      code: 4041000,
+      message: `Image Minified Invalid(${id})`,
+    });
+  }
 
+  const { type, targetPath } = file;
   await ctx.resource(targetPath, type);
 }
 
