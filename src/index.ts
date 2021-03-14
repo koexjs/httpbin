@@ -65,8 +65,6 @@ const app = new App();
 
 app.use(async (ctx, next) => {
   await next();
-
-  console.log('xxx:', ctx.response.header);
 });
 
 const env = {

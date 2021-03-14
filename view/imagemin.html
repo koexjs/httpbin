@@ -75,7 +75,7 @@
             const data = new FormData();
             data.append('file', files[0]);
 
-            fetch('/image/minify', {
+            fetch(`/image/minify${location.search}`, {
               method: 'POST',
               // headers: {
               //   'Content-Type': 'form-data',

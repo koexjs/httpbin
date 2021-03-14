@@ -3,7 +3,6 @@ import * as os from 'os';
 import * as fs from 'fs';
 import { join, extname } from 'path';
 import * as imagemin from 'imagemin';
-import * as imageminJpegtran from 'imagemin-jpegtran';
 import imageminPngquant from 'imagemin-pngquant';
 import * as imageminSvgo from 'imagemin-svgo';
 import * as imageminGifsicle from 'imagemin-gifsicle';
