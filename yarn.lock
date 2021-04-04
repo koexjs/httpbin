@@ -285,6 +285,13 @@
   resolved "https://registry.npm.taobao.org/@zcorky/query-string/download/@zcorky/query-string-1.0.2.tgz#680eedfe5f01e9a444104caedf54bb6918d4c152"
   integrity sha1-aA7t/l8B6aREEEyu31S7aRjUwVI=
 
+"@zodash/2fa@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.npm.taobao.org/@zodash/2fa/download/@zodash/2fa-0.0.9.tgz#7cd22b0903ea53ceff3fe782ed55928b70f04fc6"
+  integrity sha1-fNIrCQPqU87/P+eC7VWSi3DwT8Y=
+  dependencies:
+    "@zodash/totp" "^0.0.9"
+
 "@zodash/base62@^0.1.4":
   version "0.1.4"
   resolved "https://registry.npm.taobao.org/@zodash/base62/download/@zodash/base62-0.1.4.tgz#86d78af699e7aec3a192e69f762f1f180fa3ce18"
@@ -359,6 +366,19 @@
   dependencies:
     "@zcorky/is" "^1.0.6"
     "@zodash/to-path" "^0.1.3"
+
+"@zodash/hotp@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.npm.taobao.org/@zodash/hotp/download/@zodash/hotp-0.0.9.tgz#3e94ffc923f198ac1d4fd12b014ec6b974b8b8cb"
+  integrity sha1-PpT/ySPxmKwdT9ErAU7GuXS4uMs=
+  dependencies:
+    "@zodash/isomorphic-base32" "^0.0.1"
+    jssha "2"
+
+"@zodash/isomorphic-base32@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.npm.taobao.org/@zodash/isomorphic-base32/download/@zodash/isomorphic-base32-0.0.1.tgz#b2e270b2f89fa916b08eb1c1a1e6cf6d008adca8"
+  integrity sha1-suJwsvifqRawjrHBoebPbQCK3Kg=
 
 "@zodash/logger@^0.0.17":
   version "0.0.17"
@@ -437,6 +457,13 @@
   version "0.1.3"
   resolved "https://registry.npm.taobao.org/@zodash/to-path/download/@zodash/to-path-0.1.3.tgz#a160887903dcaa429acb8f91d7d1f475362df520"
   integrity sha1-oWCIeQPcqkKay4+R19H0dTYt9SA=
+
+"@zodash/totp@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.npm.taobao.org/@zodash/totp/download/@zodash/totp-0.0.9.tgz#3d04a7197087c13d5debf96785777c4200648ad0"
+  integrity sha1-PQSnGXCHwT1d6/lnhXd8QgBkitA=
+  dependencies:
+    "@zodash/hotp" "^0.0.9"
 
 "@zodash/uuid@^0.0.2":
   version "0.0.2"
@@ -817,6 +844,11 @@ json5@^1.0.1:
   integrity sha1-d5+wAYYE+oVOrL9iUhgNg1Q+Pb4=
   dependencies:
     minimist "^1.2.0"
+
+jssha@2:
+  version "2.4.2"
+  resolved "https://registry.npm.taobao.org/jssha/download/jssha-2.4.2.tgz#d950b095634928bd6b2bda1d42da9a3a762d65e9"
+  integrity sha1-2VCwlWNJKL1rK9odQtqaOnYtZek=
 
 keygrip@~1.1.0:
   version "1.1.0"

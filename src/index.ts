@@ -38,6 +38,8 @@ import captcha from './app/captcha';
 import ws from './app/ws';
 import socketio from './app/socket.io';
 
+import $2fa from './app/2fa';
+
 // declare module '@koex/core' {
 //   interface Request {
 //       body: any;
@@ -356,6 +358,9 @@ app.post('/email', email);
 app.get('/captcha/:token', captcha.view);
 app.post('/captcha/generate', captcha.generate);
 app.post('/captcha/validate', captcha.validate);
+
+app.get('/2fa', $2fa.generate);
+app.post('/2fa', $2fa.verify);
 
 const port = +process.env.PORT || 8080;
 
