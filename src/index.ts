@@ -40,6 +40,8 @@ import socketio from './app/socket.io';
 
 import $2fa from './app/2fa';
 
+import bankcard from './app/bankcard';
+
 // declare module '@koex/core' {
 //   interface Request {
 //       body: any;
@@ -361,6 +363,8 @@ app.post('/captcha/validate', captcha.validate);
 
 app.get('/2fa', $2fa.generate);
 app.post('/2fa', $2fa.verify);
+
+app.get('/bankcard/validate', bankcard.validate)
 
 const port = +process.env.PORT || 8080;
 
