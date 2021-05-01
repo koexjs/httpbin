@@ -10,6 +10,7 @@ export default async function proxy(ctx: Context) {
     });
   }
 
+  const { contentType } = ctx.query;
   const _url = url.parse(ctx.query.url);
 
   const proxy = createProxy({
@@ -27,7 +28,7 @@ export default async function proxy(ctx: Context) {
     path: ctx.path,
     method: ctx.method,
     headers: ctx.headers,
-    query: ctx.querystring,
+    query: _url.query,
     body: JSON.stringify((ctx.request as any).body),
     files: (ctx.request as any).files,
   });
@@ -43,6 +44,14 @@ export default async function proxy(ctx: Context) {
   ctx.set(response.headers.raw() as any);
   ctx.set('access-control-allow-origin', '*');
   ctx.set('access-control-expose-headers', 'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, Deprecation, Sunset');
+  // ctx.remove('transfer-encoding');
+
+  if (contentType) {
+    ctx.remove('content-disposition');
+    ctx.type = contentType;
+    // ctx.set('content-type', 'image/jpeg');
+  }
+
   ctx.status = response.status;
   ctx.body = response.body;
 }
