@@ -14,7 +14,7 @@ import cookies from './app/cookies';
 import cache from './app/cache';
 import etag from './app/etag';
 import * as auth from './app/auth';
-import ip from './app/ip';
+import ip, { plainIP} from './app/ip';
 
 import delay from './app/delay';
 import uuid from './app/uuid';
@@ -34,6 +34,9 @@ import pdfViewer from './app/pdf-viewer';
 
 import email from './app/email';
 import captcha from './app/captcha';
+
+import nobot from './app/nobot';
+import qrcode from './app/qrcode';
 
 import ws from './app/ws';
 import socketio from './app/socket.io';
@@ -201,6 +204,11 @@ app.get('/', async (ctx) => {
 app.get('/ip', ip);
 
 /**
+ * Returns the requester's IP address plain.
+ */
+ app.get('/ip/plain', plainIP);
+
+/**
  * Return a UUID4
  */
 app.get('/uuid', uuid);
@@ -366,6 +374,10 @@ app.get('/2fa', $2fa.generate);
 app.post('/2fa', $2fa.verify);
 
 app.get('/bankcard/validate', bankcard.validate)
+
+app.post('/nobot', nobot);
+
+app.get('/qrcode', qrcode);
 
 const port = +process.env.PORT || 8080;
 
