@@ -33,6 +33,8 @@
     "@zodash/delay": "^0.0.11",
     "@zodash/format": "^1.0.1-alpha.11",
     "@zodash/mail": "^0.0.2",
+    "@zodash/nobot": "^0.0.1",
+    "@zodash/qrcode": "^0.0.5",
     "@zodash/shorturl": "^0.2.5",
     "@zodash/uuid": "^0.0.3",
     "@zoproxy/batch": "^0.0.36",
