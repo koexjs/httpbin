@@ -37,6 +37,7 @@ import captcha from './app/captcha';
 
 import ws from './app/ws';
 import socketio from './app/socket.io';
+import pbcopy from './app/pbcopy';
 
 import $2fa from './app/2fa';
 
@@ -375,3 +376,4 @@ const server = app.listen(port, '0.0.0.0', () => {
 
 ws('/ws', server);
 socketio('/socket.io', server);
+pbcopy('/pbcopy', server);
