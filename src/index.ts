@@ -36,6 +36,7 @@ import email from './app/email';
 import captcha from './app/captcha';
 
 import nobot from './app/nobot';
+import qrcode from './app/qrcode';
 
 import ws from './app/ws';
 import socketio from './app/socket.io';
@@ -375,6 +376,8 @@ app.post('/2fa', $2fa.verify);
 app.get('/bankcard/validate', bankcard.validate)
 
 app.post('/nobot', nobot);
+
+app.get('/qrcode', qrcode);
 
 const port = +process.env.PORT || 8080;
 
