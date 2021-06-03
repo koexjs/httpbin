@@ -35,6 +35,8 @@ import pdfViewer from './app/pdf-viewer';
 import email from './app/email';
 import captcha from './app/captcha';
 
+import nobot from './app/nobot';
+
 import ws from './app/ws';
 import socketio from './app/socket.io';
 import pbcopy from './app/pbcopy';
@@ -371,6 +373,8 @@ app.get('/2fa', $2fa.generate);
 app.post('/2fa', $2fa.verify);
 
 app.get('/bankcard/validate', bankcard.validate)
+
+app.post('/nobot', nobot);
 
 const port = +process.env.PORT || 8080;
 
