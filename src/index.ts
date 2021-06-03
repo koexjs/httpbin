@@ -14,7 +14,7 @@ import cookies from './app/cookies';
 import cache from './app/cache';
 import etag from './app/etag';
 import * as auth from './app/auth';
-import ip from './app/ip';
+import ip, { plainIP} from './app/ip';
 
 import delay from './app/delay';
 import uuid from './app/uuid';
@@ -199,6 +199,11 @@ app.get('/', async (ctx) => {
  * Returns the requester's IP address.
  */
 app.get('/ip', ip);
+
+/**
+ * Returns the requester's IP address plain.
+ */
+ app.get('/ip/plain', plainIP);
 
 /**
  * Return a UUID4
