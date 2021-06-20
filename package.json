@@ -37,6 +37,7 @@
     "@zodash/qrcode": "^0.0.5",
     "@zodash/shorturl": "^0.2.5",
     "@zodash/uuid": "^0.0.3",
+    "@zodash/websocket": "^0.1.5",
     "@zoproxy/batch": "^0.0.36",
     "basic-auth": "^2.0.1",
     "socket.io": "^3.1.0",
