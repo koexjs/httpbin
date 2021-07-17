@@ -346,12 +346,12 @@
   dependencies:
     "@zodash/totp" "^0.0.9"
 
-"@zodash/bankcard@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.nlark.com/@zodash/bankcard/download/@zodash/bankcard-0.0.2.tgz#b72b8bb76279e5c2d4eaf44da1a302ade26973d1"
-  integrity sha1-tyuLt2J55cLU6vRNoaMCreJpc9E=
+"@zodash/bankcard@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.nlark.com/@zodash/bankcard/download/@zodash/bankcard-0.0.5.tgz#d52e9b638e92667a5528d53f1928a69e7fc3a131"
+  integrity sha1-1S6bY46SZnpVKNU/GSimnn/DoTE=
   dependencies:
-    "@zcorky/moment" "^1.2.0"
+    "@zodash/find" "^0.1.7"
     "@zodash/random" "^1.2.10"
 
 "@zodash/base62@^0.1.4":
