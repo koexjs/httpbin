@@ -14,7 +14,7 @@
     "prod": "NODE_ENV=production node lib/serve.js",
     "fmt": "eslint src/**/*.{ts,tsx} --fix && prettier --write src/**/{*.ts,*.tsx}",
     "commit": "cz",
-    "clean": "rimraf -rf dist"
+    "clean": "rimraf -rf lib"
   },
   "devDependencies": {
     "@types/node": "^16.4.0",

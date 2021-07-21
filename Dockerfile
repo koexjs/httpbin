@@ -28,7 +28,7 @@ COPY  ./yarn.lock .
 
 RUN   yarn --production && yarn cache clean --force
 
-COPY  --from=build /app/dist ./dist
+COPY  --from=build /app/lib ./lib
 
 COPY  --from=build /app/static ./static
 
