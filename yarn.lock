@@ -51,6 +51,77 @@
     mz "^2.7.0"
     stream-wormhole "^1.1.0"
 
+"@octokit/auth-token@^2.4.4":
+  version "2.4.5"
+  resolved "https://registry.npm.taobao.org/@octokit/auth-token/download/@octokit/auth-token-2.4.5.tgz#568ccfb8cb46f36441fac094ce34f7a875b197f3"
+  integrity sha1-VozPuMtG82RB+sCUzjT3qHWxl/M=
+  dependencies:
+    "@octokit/types" "^6.0.3"
+
+"@octokit/core@^3.5.1":
+  version "3.5.1"
+  resolved "https://registry.nlark.com/@octokit/core/download/@octokit/core-3.5.1.tgz#8601ceeb1ec0e1b1b8217b960a413ed8e947809b"
+  integrity sha1-hgHO6x7A4bG4IXuWCkE+2OlHgJs=
+  dependencies:
+    "@octokit/auth-token" "^2.4.4"
+    "@octokit/graphql" "^4.5.8"
+    "@octokit/request" "^5.6.0"
+    "@octokit/request-error" "^2.0.5"
+    "@octokit/types" "^6.0.3"
+    before-after-hook "^2.2.0"
+    universal-user-agent "^6.0.0"
+
+"@octokit/endpoint@^6.0.1":
+  version "6.0.12"
+  resolved "https://registry.nlark.com/@octokit/endpoint/download/@octokit/endpoint-6.0.12.tgz#3b4d47a4b0e79b1027fb8d75d4221928b2d05658"
+  integrity sha1-O01HpLDnmxAn+4111CIZKLLQVlg=
+  dependencies:
+    "@octokit/types" "^6.0.3"
+    is-plain-object "^5.0.0"
+    universal-user-agent "^6.0.0"
+
+"@octokit/graphql@^4.5.8":
+  version "4.6.4"
+  resolved "https://registry.nlark.com/@octokit/graphql/download/@octokit/graphql-4.6.4.tgz#0c3f5bed440822182e972317122acb65d311a5ed"
+  integrity sha1-DD9b7UQIIhgulyMXEirLZdMRpe0=
+  dependencies:
+    "@octokit/request" "^5.6.0"
+    "@octokit/types" "^6.0.3"
+    universal-user-agent "^6.0.0"
+
+"@octokit/openapi-types@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.nlark.com/@octokit/openapi-types/download/@octokit/openapi-types-9.0.0.tgz#05d33f999326785445c915d25167d68bd5eddb24"
+  integrity sha1-BdM/mZMmeFRFyRXSUWfWi9Xt2yQ=
+
+"@octokit/request-error@^2.0.5", "@octokit/request-error@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.nlark.com/@octokit/request-error/download/@octokit/request-error-2.1.0.tgz#9e150357831bfc788d13a4fd4b1913d60c74d677"
+  integrity sha1-nhUDV4Mb/HiNE6T9SxkT1gx01nc=
+  dependencies:
+    "@octokit/types" "^6.0.3"
+    deprecation "^2.0.0"
+    once "^1.4.0"
+
+"@octokit/request@^5.6.0":
+  version "5.6.0"
+  resolved "https://registry.nlark.com/@octokit/request/download/@octokit/request-5.6.0.tgz#6084861b6e4fa21dc40c8e2a739ec5eff597e672"
+  integrity sha1-YISGG25Poh3EDI4qc57F7/WX5nI=
+  dependencies:
+    "@octokit/endpoint" "^6.0.1"
+    "@octokit/request-error" "^2.1.0"
+    "@octokit/types" "^6.16.1"
+    is-plain-object "^5.0.0"
+    node-fetch "^2.6.1"
+    universal-user-agent "^6.0.0"
+
+"@octokit/types@^6.0.3", "@octokit/types@^6.16.1":
+  version "6.19.1"
+  resolved "https://registry.nlark.com/@octokit/types/download/@octokit/types-6.19.1.tgz#6ea5f759d8d37e892e59c0a65f10892789b84a25"
+  integrity sha1-bqX3WdjTfokuWcCmXxCJJ4m4SiU=
+  dependencies:
+    "@octokit/openapi-types" "^9.0.0"
+
 "@types/accepts@*":
   version "1.3.5"
   resolved "https://registry.npm.taobao.org/@types/accepts/download/@types/accepts-1.3.5.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Faccepts%2Fdownload%2F%40types%2Faccepts-1.3.5.tgz#c34bec115cfc746e04fe5a059df4ce7e7b391575"
@@ -361,6 +432,11 @@
   dependencies:
     "@zodash/basex" "^0.1.4"
 
+"@zodash/base64@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.nlark.com/@zodash/base64/download/@zodash/base64-0.0.5.tgz#cc9570aed3a9320bec3005ee2b00fa3a54526c9d"
+  integrity sha1-zJVwrtOpMgvsMAXuKwD6OlRSbJ0=
+
 "@zodash/basex@^0.1.4":
   version "0.1.4"
   resolved "https://registry.npm.taobao.org/@zodash/basex/download/@zodash/basex-0.1.4.tgz#f985fec4c7ae3b0d0ecbb9df67b25fef9d7f2392"
@@ -527,6 +603,13 @@
   dependencies:
     "@zodash/save-as" "^0.0.1"
 
+"@zodash/emitter@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.nlark.com/@zodash/emitter/download/@zodash/emitter-0.0.6.tgz#d9ffcd6d4649d3662bcaeedb7874afc6ddb2363e"
+  integrity sha1-2f/NbUZJ02Yryu7beHSvxt2yNj4=
+  dependencies:
+    "@zodash/event" "^0.1.7"
+
 "@zodash/error@^0.1.7":
   version "0.1.7"
   resolved "https://registry.nlark.com/@zodash/error/download/@zodash/error-0.1.7.tgz#667c5964641e59ee332245d1a28e725f3ab436e7"
@@ -571,6 +654,16 @@
     "@zodash/load-image" "^0.0.4"
     "@zodash/load-js" "^0.2.12"
     "@zodash/save-as" "^0.0.1"
+
+"@zodash/generate-password@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.nlark.com/@zodash/generate-password/download/@zodash/generate-password-0.0.1.tgz#52cac869842e9af47903c437de2a3a7bff320a46"
+  integrity sha1-UsrIaYQumvR5A8Q33io6e/8yCkY=
+  dependencies:
+    "@octokit/core" "^3.5.1"
+    "@zodash/base64" "^0.0.5"
+    "@zodash/compose" "^0.1.6"
+    "@zodash/emitter" "^0.0.6"
 
 "@zodash/get@^1.1.3":
   version "1.1.3"
@@ -986,6 +1079,11 @@ basic-auth@^2.0.1:
   dependencies:
     safe-buffer "5.1.2"
 
+before-after-hook@^2.2.0:
+  version "2.2.2"
+  resolved "https://registry.nlark.com/before-after-hook/download/before-after-hook-2.2.2.tgz#a6e8ca41028d90ee2c24222f201c90956091613e"
+  integrity sha1-pujKQQKNkO4sJCIvIByQlWCRYT4=
+
 buffer-alloc-unsafe@^1.1.0:
   version "1.1.0"
   resolved "https://registry.nlark.com/buffer-alloc-unsafe/download/buffer-alloc-unsafe-1.1.0.tgz#bd7dc26ae2972d0eda253be061dba992349c19f0"
@@ -1180,6 +1278,11 @@ depd@~2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/depd/download/depd-2.0.0.tgz#b696163cc757560d09cf22cc8fad1571b79e76df"
   integrity sha1-tpYWPMdXVg0JzyLMj60Vcbeedt8=
+
+deprecation@^2.0.0:
+  version "2.3.1"
+  resolved "https://registry.npm.taobao.org/deprecation/download/deprecation-2.3.1.tgz#6368cbdb40abf3373b525ac87e4a260c3a700919"
+  integrity sha1-Y2jL20Cr8zc7UlrIfkomDDpwCRk=
 
 destroy@^1.0.4:
   version "1.0.4"
@@ -1379,6 +1482,11 @@ is-generator-function@^1.0.7:
   resolved "https://registry.npm.taobao.org/is-generator-function/download/is-generator-function-1.0.8.tgz?cache=0&sync_timestamp=1606926805401&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fis-generator-function%2Fdownload%2Fis-generator-function-1.0.8.tgz#dfb5c2b120e02b0a8d9d2c6806cd5621aa922f7b"
   integrity sha1-37XCsSDgKwqNnSxoBs1WIaqSL3s=
 
+is-plain-object@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.nlark.com/is-plain-object/download/is-plain-object-5.0.0.tgz#4427f50ab3429e9025ea7d52e9043a9ef4159344"
+  integrity sha1-RCf1CrNCnpAl6n1S6QQ6nvQVk0Q=
+
 is-stream@^1.0.1:
   version "1.1.0"
   resolved "https://registry.nlark.com/is-stream/download/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
@@ -1569,7 +1677,7 @@ node-fetch@^1.0.1:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
-node-fetch@^2.6.0:
+node-fetch@^2.6.0, node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://registry.npm.taobao.org/node-fetch/download/node-fetch-2.6.1.tgz?cache=0&sync_timestamp=1599309667528&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnode-fetch%2Fdownload%2Fnode-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha1-BFvTI2Mfdu0uK1VXM5RBa2OaAFI=
@@ -1590,6 +1698,13 @@ on-finished@^2.3.0:
   integrity sha1-IPEzZIGwg811M3mSoWlxqi2QaUc=
   dependencies:
     ee-first "1.1.1"
+
+once@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.nlark.com/once/download/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
+  integrity sha1-WDsap3WWHUsROsF9nFC6753Xa9E=
+  dependencies:
+    wrappy "1"
 
 only@~0.0.2:
   version "0.0.2"
@@ -1932,6 +2047,11 @@ typescript@^3.6.3:
   resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.9.7.tgz?cache=0&sync_timestamp=1609226973169&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
   integrity sha1-mNYApevcOPQMsndSLxLcgA6eJfo=
 
+universal-user-agent@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.npm.taobao.org/universal-user-agent/download/universal-user-agent-6.0.0.tgz#3381f8503b251c0d9cd21bc1de939ec9df5480ee"
+  integrity sha1-M4H4UDslHA2c0hvB3pOeyd9UgO4=
+
 unpipe@1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/unpipe/download/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
@@ -1967,6 +2087,11 @@ wrap-ansi@^5.1.0:
     ansi-styles "^3.2.0"
     string-width "^3.0.0"
     strip-ansi "^5.0.0"
+
+wrappy@1:
+  version "1.0.2"
+  resolved "https://registry.nlark.com/wrappy/download/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
+  integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
 ws@^7.4.2, ws@~7.4.2:
   version "7.4.2"

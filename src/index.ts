@@ -48,6 +48,8 @@ import $2fa from './app/2fa';
 
 import bankcard from './app/bankcard';
 
+import generatePassword from './app/generate-password';
+
 // declare module '@koex/core' {
 //   interface Request {
 //       body: any;
@@ -380,6 +382,8 @@ app.get('/bankcard/validate', bankcard.validate)
 app.post('/nobot', nobot);
 
 app.get('/qrcode', qrcode);
+
+app.get('/password/generate', generatePassword);
 
 const port = +process.env.PORT || 8080;
 

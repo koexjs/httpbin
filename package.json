@@ -32,6 +32,7 @@
     "@zodash/crypto": "^0.0.3",
     "@zodash/delay": "^0.0.11",
     "@zodash/format": "^1.0.1-alpha.11",
+    "@zodash/generate-password": "^0.0.1",
     "@zodash/mail": "^0.0.2",
     "@zodash/nobot": "^0.0.1",
     "@zodash/qrcode": "^0.0.5",
