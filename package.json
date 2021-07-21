@@ -1,31 +1,55 @@
 {
-  "name": "helloworld",
-  "version": "0.7.2",
-  "main": "index.ts",
+  "name": "@koex/httpbin",
+  "version": "0.7.3",
+  "main": "",
   "author": "Zero",
   "license": "MIT",
-  "private": true,
+  "bin": {
+    "httpbin": "./lib/cli.js",
+    "koex-httpbin": "./lib/cli.js"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.prod.json",
-    "dev": "tsc-watch -p tsconfig.json --onSuccess \"node dist/index.js\"",
-    "prod": "NODE_ENV=production node dist/index.js"
+    "dev": "tsc-watch -p tsconfig.json --onSuccess \"node lib/serve.js\"",
+    "prod": "NODE_ENV=production node lib/serve.js",
+    "fmt": "eslint src/**/*.{ts,tsx} --fix && prettier --write src/**/{*.ts,*.tsx}",
+    "commit": "cz",
+    "clean": "rimraf -rf dist"
   },
   "devDependencies": {
-    "@types/node": "^12.7.5",
+    "@types/node": "^16.4.0",
     "@types/pdfjs-dist": "^2.1.7",
     "@types/socket.io": "^2.1.13",
     "@types/ws": "^7.4.0",
-    "ts-node": "^9.1.1",
     "tsc-watch": "^4.2.9",
-    "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.6.3"
+    "tsconfig-paths": "^3.9.0"
+  },
+  "lint-staged": {
+    "**/*.ts": [
+      "echo 'lint stage run'",
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ],
+    "*.{json.css,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "dependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@koex/body": "^0.0.8",
     "@koex/core": "^0.10.0",
     "@koex/cors": "^0.0.2",
     "@koex/static": "^0.13.2",
     "@types/basic-auth": "^1.1.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "@zcorky/tsconfig": "^0.0.3",
     "@zodash/2fa": "^0.0.9",
     "@zodash/bankcard": "^0.0.5",
     "@zodash/captcha": "^0.0.4",
@@ -41,7 +65,16 @@
     "@zodash/websocket": "^0.1.5",
     "@zoproxy/batch": "^0.0.36",
     "basic-auth": "^2.0.1",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.0.1",
+    "prettier": "^2.3.2",
     "socket.io": "^3.1.0",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5",
     "ws": "^7.4.2"
   }
 }

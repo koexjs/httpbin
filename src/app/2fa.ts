@@ -21,7 +21,11 @@ export async function verify(ctx: Context) {
   await ctx.json({
     secret,
     otp,
-    isValid: await $2fa.verify(otp, secret, { length: 6 }),
+    isValid: await $2fa.verify(
+      otp as any as string,
+      secret as any as string,
+      { length: 6 },
+    ),
   });
 }
 

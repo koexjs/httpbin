@@ -3,7 +3,7 @@ import { delay } from '@zodash/delay';
 
 export default async function _delay(ctx: Context) {
   const ms = +ctx.params.delay || 0;
-  
+
   await delay(ms);
 
   await ctx.json({

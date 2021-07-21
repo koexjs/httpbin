@@ -57,11 +57,13 @@ export default (path: string, server: Server) => {
         payload: 'ok',
       });
 
-      targetSocket.send(JSON.stringify({
-        type: 'message',
-        source: socket.id,
-        payload,
-      }));
+      targetSocket.send(
+        JSON.stringify({
+          type: 'message',
+          source: socket.id,
+          payload,
+        }),
+      );
     });
 
     socket.on('close', onDisconnect);
@@ -75,7 +77,7 @@ export default (path: string, server: Server) => {
       cache.set(id, socket);
 
       let it = null;
-      
+
       socket.id = id;
       socket.renew = renew;
       socket.gc = gc;
@@ -110,14 +112,14 @@ export default (path: string, server: Server) => {
         }
 
         it = setTimeout(gc, 30 * 60 * 1000);
-      };
+      }
 
       function pong() {
         renew();
-  
+
         socket.send('pong');
       }
-  
+
       function isPing(message: string) {
         return message === 'ping';
       }
@@ -140,7 +142,7 @@ export default (path: string, server: Server) => {
     if (path !== pathname) {
       // console.log('destroy on upgrade:', pathname);
       // return socket.destroy();
-      return ;
+      return;
     }
 
     app.handleUpgrade(request, socket, head, (socket) => {

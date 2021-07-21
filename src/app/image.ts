@@ -4,7 +4,10 @@ export async function auto(ctx: Context) {
   if (ctx.accepts('image/webp')) {
     return await ctx.resource('./static/images/wolf_1.webp', 'image/webp');
   } else if (ctx.accepts('image/svg+xml')) {
-    return await ctx.resource('./static/images/svg_logo.svg', 'image/svg+xml');
+    return await ctx.resource(
+      './static/images/svg_logo.svg',
+      'image/svg+xml',
+    );
   } else if (ctx.accepts('image/jpeg')) {
     return await ctx.resource('./static/images/jackal.jpg', 'image/jpeg');
   } else if (ctx.accepts('image/png')) {

@@ -23,14 +23,13 @@ export default (path: string, server: Server) => {
           payload: 'invalid format',
         });
       }
-  
+
       socket.to(target).emit('message', {
         type: 'message',
         source: socket.id,
         payload,
       });
     });
-
 
     function onDisconnect() {
       log(socket, 'disconnected');

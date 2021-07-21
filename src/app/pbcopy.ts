@@ -5,7 +5,6 @@ import { getLogger } from '@zodash/logger';
 
 import * as WebSocket from '../utils/ws';
 
-const cache = new Cache<string, WebSocket>();
 const logger = getLogger('ws');
 
 export interface Client extends WebSocket.Socket {
@@ -18,7 +17,7 @@ export default (path: string, server: Server) => {
   const app = new WebSocket.Server();
   const codeSenderMap = new Map<string, WebSocket.Socket>();
   const idReceiverMap = new Map<string, WebSocket.Socket>();
-  
+
   app.on('connection', (_client) => {
     const client = _client as unknown as Client;
 
@@ -51,7 +50,9 @@ export default (path: string, server: Server) => {
 
       if (!codeSenderMap.has(code)) {
         // return client.emit('error', new Error('invalid code'));
-        return client.emit('paste.failed', { message: `code(${code}) is invalid` });
+        return client.emit('paste.failed', {
+          message: `code(${code}) is invalid`,
+        });
       }
 
       idReceiverMap.set(client.id, client);
@@ -63,21 +64,23 @@ export default (path: string, server: Server) => {
       sender.emit('paste', { receiver });
     });
 
+    client.on(
+      'sender.paste.to.receiver',
+      ({ receiver: receiverId, signature, payload }) => {
+        logger.log('[sender] sender.paste.to.receiver', receiverId);
 
-    client.on('sender.paste.to.receiver', ({ receiver: receiverId, signature, payload }) => {
-      logger.log('[sender] sender.paste.to.receiver', receiverId);
+        if (!idReceiverMap.has(receiverId)) {
+          // return ;
+          return client.emit('error', new Error('invalid receiver'));
+        }
 
-      if (!idReceiverMap.has(receiverId)) {
-        // return ;
-        return client.emit('error', new Error('invalid receiver'));
-      }
+        const receiver = idReceiverMap.get(receiverId);
+        // idReceiverMap.delete(receiverId);
 
-      const receiver = idReceiverMap.get(receiverId);
-      // idReceiverMap.delete(receiverId);
-
-      // receiver.emit('sender.paste.to.receiver', { signature, payload });
-      receiver.emit('paste', { signature, payload });
-    });
+        // receiver.emit('sender.paste.to.receiver', { signature, payload });
+        receiver.emit('paste', { signature, payload });
+      },
+    );
 
     client.on('paste.done', ({ code }) => {
       const receiver = client.id;
@@ -95,7 +98,7 @@ export default (path: string, server: Server) => {
     if (path !== pathname) {
       // logger.log('destroy on upgrade:', pathname);
       // return socket.destroy();
-      return ;
+      return;
     }
 
     app.handleUpgrade(request, socket, head, (ws) => {

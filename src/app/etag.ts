@@ -1,12 +1,10 @@
 import { Context } from '@koex/core';
-import * as base64 from '@zodash/crypto/lib/base64';
-import { uuid } from '@zodash/uuid';
 
 export default async function etag(ctx: Context) {
   const etag = ctx.params.etag;
   const IfNoneMatch = ctx.get('If-None-Match');
   const IfMatch = ctx.get('If-Match');
-  
+
   if (IfNoneMatch) {
     if (etag === IfNoneMatch) {
       ctx.status = 304;
@@ -19,7 +17,7 @@ export default async function etag(ctx: Context) {
   } else if (IfMatch) {
     if (etag != IfMatch) {
       ctx.status = 412;
-      return ;
+      return;
     }
   }
 

@@ -42,7 +42,7 @@ export default async function notify(ctx: Context) {
     });
   } catch (error) {
     logger.error(error);
-    
+
     ctx.throw(500, {
       code: 5006000,
       message: error.message ?? 'nobot internal server error',

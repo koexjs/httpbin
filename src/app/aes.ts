@@ -2,12 +2,7 @@ import { Context } from '@koex/core';
 import * as aes from '@zodash/crypto/lib/aes';
 
 export async function encrypt(ctx: Context) {
-  const {
-    algorithm,
-    iv,
-    key,
-    value,
-  } = ctx.params;
+  const { algorithm, iv, key, value } = ctx.params;
 
   await ctx.json({
     algorithm,
@@ -19,12 +14,7 @@ export async function encrypt(ctx: Context) {
 }
 
 export async function decrypt(ctx: Context) {
-  const {
-    algorithm,
-    iv,
-    key,
-    value,
-  } = ctx.params;
+  const { algorithm, iv, key, value } = ctx.params;
 
   await ctx.json({
     algorithm,

@@ -1,5 +1,4 @@
 import { Server } from 'http';
-import * as url from 'url';
 import doreamon from '@zodash/doreamon';
 import * as WebSocket from '@zodash/websocket';
 
@@ -20,7 +19,7 @@ export interface Options {
 
 export function relay(options?: Options) {
   const logger = doreamon.logger.getLogger('relay');
-  
+
   const path = options?.path || '/';
 
   const app = new WebSocket.Server({
@@ -30,7 +29,7 @@ export function relay(options?: Options) {
   //
   const serverSockets = new Map<string, Client>();
   const clientSockets = new Map<string, Client>();
-  
+
   app.on('connection', (_client) => {
     const socket = _client as unknown as Client;
 
@@ -38,7 +37,7 @@ export function relay(options?: Options) {
 
     socket.on('disconnect', () => {
       logger.log('socket disconnect:', socket.id);
-      
+
       if (socket.isServer) {
         serverSockets.delete(socket.code);
 
@@ -79,18 +78,18 @@ export function relay(options?: Options) {
 
         socket.emit('error', message);
         socket.disconnect();
-        return ;
+        return;
       }
 
       // bind socket: server <-> client: bind one-2-one
       const serverSocket = serverSockets.get(code);
       const clientSocket = socket;
       // if already bind client, should emit error, because
-      if (!!serverSocket.client) {
+      if (serverSocket.client) {
         const message = `code(${code}) is used by others, you cannot use it`;
         clientSocket.emit('error', message);
         clientSocket.disconnect();
-        return ;
+        return;
       }
       clientSocket.server = serverSocket;
       serverSocket.client = clientSocket;

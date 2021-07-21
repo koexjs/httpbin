@@ -21,10 +21,12 @@ export default async function qrcodeApp(ctx: Context) {
   try {
     const dataURL = await qrcode(text);
 
-    ctx.body = `<img style="width: ${width ?? 'auto'}; height: auto;" src=${dataURL} />`;
+    ctx.body = `<img style="width: ${
+      width ?? 'auto'
+    }; height: auto;" src=${dataURL} />`;
   } catch (error) {
     logger.error(error);
-    
+
     ctx.throw(500, {
       code: 5006000,
       message: error.message ?? 'nobot internal server error',

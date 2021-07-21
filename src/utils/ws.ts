@@ -43,16 +43,30 @@ export class Server {
     console.log('start ws app ...');
   }
 
-  public handleUpgrade(request: http.IncomingMessage, socket: net.Socket, upgradeHead: Buffer, callback: (client: ws, request: http.IncomingMessage) => void) {
-    return this.ws.handleUpgrade(request, socket, upgradeHead, callback);
+  public handleUpgrade(
+    request: http.IncomingMessage,
+    socket: net.Socket,
+    upgradeHead: Buffer,
+    callback: (client: ws, request: http.IncomingMessage) => void,
+  ) {
+    return this.ws.handleUpgrade(
+      request,
+      socket as any,
+      upgradeHead,
+      callback,
+    );
   }
 
-  public on(event: 'connection', fn: (socket: Socket) => void): void
+  public on(event: 'connection', fn: (socket: Socket) => void): void;
   public on(event: string, fn: (...args: any[]) => void) {
     return this.emitter.on(event, fn);
   }
 
-  public emit(event: 'connection', socket: ws, request: http.IncomingMessage): void
+  public emit(
+    event: 'connection',
+    socket: ws,
+    request: http.IncomingMessage,
+  ): void;
   public emit(event: string, ...args: any[]) {
     return this.ws.emit(event, ...args);
   }
@@ -91,7 +105,7 @@ export class Server {
     return () => {
       clearInterval(itIsAlive);
       clearInterval(itHasMessageIn10Minutes);
-    }
+    };
   }
 }
 
@@ -118,7 +132,7 @@ export class Socket {
 
     this.socket.on('error', (error) => {
       // this.socket.isAlive = false;
-      
+
       this.emit('error', error);
     });
 
@@ -137,7 +151,7 @@ export class Socket {
     this.on('ping', () => {
       this.socket.isAlive = true;
 
-      this.emit('pong')
+      this.emit('pong');
     });
 
     this.emit('id', this.socket.id);
@@ -157,12 +171,14 @@ export class Socket {
 
   public emit(type: string, ...args: any[]) {
     if (type === 'error') {
-      return this.socket.send(JSON.stringify([
-        type,
-        {
-          message: args[0] instanceof Error ? args[0].message : args[0],
-        },
-      ]));
+      return this.socket.send(
+        JSON.stringify([
+          type,
+          {
+            message: args[0] instanceof Error ? args[0].message : args[0],
+          },
+        ]),
+      );
     }
 
     this.socket.send(JSON.stringify([type, ...args]));
@@ -180,7 +196,7 @@ export class Socket {
 export class Client {
   private emitter = new EventEmitter();
   private readonly socket = new ws(this.url);
-  
+
   public id: string;
   public isAlive: boolean;
   public createdAt = new Date();
@@ -218,7 +234,7 @@ export class Client {
       this.ping();
     });
 
-    this.on('id', id => {
+    this.on('id', (id) => {
       debug('receive id:', id);
       this.id = id;
 
@@ -230,7 +246,10 @@ export class Client {
       debug('onmessage:', type, payload);
 
       if (type === 'error') {
-        return this.emitter.emit('error', new Error(payload?.message ?? 'unknown'));
+        return this.emitter.emit(
+          'error',
+          new Error(payload?.message ?? 'unknown'),
+        );
       }
 
       this.emitter.emit(type, payload);

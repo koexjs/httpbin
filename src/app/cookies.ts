@@ -1,5 +1,4 @@
 import { Context } from '@koex/core';
-import * as base64 from '@zodash/crypto/lib/base64';
 
 export async function raw(ctx: Context) {
   await ctx.json({

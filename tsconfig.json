@@ -1,31 +1,9 @@
 {
+  "extends": "@zcorky/tsconfig",
   "compilerOptions": {
-    "module": "commonjs",
-    "declaration": false,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "esnext",
-    "sourceMap": false,
-    "lib": [
-      "es2018"
-    ],
-    "resolveJsonModule": true,
-    "outDir": "./dist",
-    "baseUrl": ".",
-    "paths": {
-      "@koex/*": ["packages/*"]
-    }
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "outDir": "./lib"
   },
-  "exclude": [
-    "node_modules",
-    "lib",
-    "__tests__",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ],
-  "include": [
-    "src"
-  ]
- }
+  "include": ["src/**/*.ts"]
+}

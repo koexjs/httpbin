@@ -14,7 +14,7 @@ export async function validate(ctx: Context) {
 
   await ctx.json({
     cardNo,
-    bank: await bankcard.parse(cardNo),
+    bank: await bankcard.parse(cardNo as any as string),
   });
 }
 

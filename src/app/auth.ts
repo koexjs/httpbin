@@ -9,8 +9,8 @@ export async function basic(ctx: Context) {
     return ctx.throw(401, null, {
       headers: {
         'WWW-Authenticate': `Basic realm="Secure Area"`,
-        'user': user && user.name,
-        'pass': user && user.pass, 
+        user: user && user.name,
+        pass: user && user.pass,
       },
     });
   }
@@ -35,7 +35,7 @@ export async function bearer(ctx: Context) {
     });
   }
 
-  const token = /^Bearer\s(\w+)/.exec(authorization)[1]
+  const token = /^Bearer\s(\w+)/.exec(authorization)[1];
 
   await ctx.json({
     authenticated: true,

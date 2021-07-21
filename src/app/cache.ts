@@ -3,7 +3,8 @@ import * as base64 from '@zodash/crypto/lib/base64';
 import { uuid } from '@zodash/uuid';
 
 export default async function cache(ctx: Context) {
-  const isConditional = ctx.get('If-Modified-Since') || ctx.get('If-None-Match');
+  const isConditional =
+    ctx.get('If-Modified-Since') || ctx.get('If-None-Match');
 
   if (!isConditional) {
     const lastModified = new Date().toUTCString();

@@ -3,11 +3,14 @@ import { create as createCaptcha } from '@zodash/captcha';
 import Cache from '@zodash/cache';
 import { token as generateToken } from '@zodash/random';
 
-const codeCache = new Cache<string, {
-  code: string;
-  type: string;
-  data: string;
-}>(2500);
+const codeCache = new Cache<
+  string,
+  {
+    code: string;
+    type: string;
+    data: string;
+  }
+>(2500);
 
 export async function generate(ctx: Context) {
   const { type, code, data } = createCaptcha({ type: 'image' });
@@ -29,25 +32,24 @@ export async function view(ctx: Context) {
   const { token } = ctx.params;
 
   ctx.set('Cache-Control', 'public, max-age=7200');
-  
+
   if (!token) {
     ctx.logger.error('Token is required');
     ctx.status = 404;
-    return ;
+    return;
   }
 
   const cached = codeCache.get(token);
   if (!cached) {
     ctx.logger.error('Token is invalid');
     ctx.status = 404;
-    return ;
+    return;
   }
 
   const { type, data } = cached;
   ctx.type = type;
   ctx.body = data;
 }
-
 
 export async function validate(ctx: Context) {
   const { token, code } = ctx.request.body;
