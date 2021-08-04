@@ -59,7 +59,7 @@
     "@zodash/generate-password": "^0.0.1",
     "@zodash/mail": "^0.0.2",
     "@zodash/nobot": "^0.0.1",
-    "@zodash/qrcode": "^0.0.5",
+    "@zodash/qrcode": "^0.1.1",
     "@zodash/shorturl": "^0.2.5",
     "@zodash/uuid": "^0.0.3",
     "@zodash/websocket": "^0.1.5",

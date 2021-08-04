@@ -1161,10 +1161,10 @@
   resolved "https://registry.yarnpkg.com/@zodash/pick/-/pick-1.1.6.tgz#20bff3a73c9404b6a0918cc9476e5f9723d1ddc1"
   integrity sha512-3e1JN44xQBf5oLmx+BJM9vwh8eqjRcSkyycCodnA9wkz/D4qYBptO9wi/lrTqOOyXd4SKpMkk0iyf9ZG/4K95w==
 
-"@zodash/qrcode@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@zodash/qrcode/-/qrcode-0.0.5.tgz#8cdcef09cbbb0d808110b3567ce7325cfa1a6f9e"
-  integrity sha512-4VNXxMgPdGqEeOW1ZRdmiTd3NxkyXAOh7rGqBMEfMTpVZJRdR6y/Q1v0vf0QmKW03QjK0Qc+7slU3Z3Yi2SrGA==
+"@zodash/qrcode@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@zodash/qrcode/-/qrcode-0.1.1.tgz#6fc0af1bff58caa19b76d4fc26193a917089acd5"
+  integrity sha512-X8M8wbxrhDORfBc6FEBNjnJFDdBzY+VTdxh42JNbBWXvWrtHfbcDDJJdlrzeddrYGqp3XV1r5CnbVP8248kmig==
   dependencies:
     "@zodash/cache" "^0.0.5"
     qrcode "^1.4.4"
