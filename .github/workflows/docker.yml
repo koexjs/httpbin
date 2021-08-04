@@ -54,7 +54,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: whatwewant/zmicro
+          images: whatwewant/httpbin
           tags: |
             type=ref,event=branch
             type=semver,pattern=v{{version}}
