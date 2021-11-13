@@ -719,6 +719,13 @@
   resolved "https://registry.yarnpkg.com/@zcorky/tsconfig/-/tsconfig-0.0.3.tgz#2ee6d2c1ac113fa1402296b5050218c2558996c9"
   integrity sha512-/cwGPKJC06LQdIMfaTWvbQorslCh6aUf1z4NT9ZPEZAiFcxt5Yo/6beCje7jQGUQu4eaQ+FjBNvJnpRWcjQnPA==
 
+"@znode/dns@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.npmmirror.com/@znode/dns/download/@znode/dns-0.0.1.tgz#3e5ba597467ce2f452df11868a683850583995ec"
+  integrity sha512-QTlimVc58+Hh01c0nbT1M5temrkiew+gd8RyqKyHVTEleVY6lF3y2CfoNMRJWaBTUoKrE4ORbiRQk+dwbNUoxw==
+  dependencies:
+    "@zodash/cache" "^0.0.6"
+
 "@zodash/2fa@^0.0.9":
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/@zodash/2fa/-/2fa-0.0.9.tgz#7cd22b0903ea53ceff3fe782ed55928b70f04fc6"
@@ -762,6 +769,13 @@
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@zodash/cache/-/cache-0.0.5.tgz#60375e80bad64aeb2c34fc245d174104b4f0842d"
   integrity sha512-GC4YWfTatHs0FHuzofVk42hJCfxopwomqRgVUQMOjw5ZlUduQQTvbdMHzSQW6ASsTMG6BIb4FQ/0R3Zh34x/TQ==
+  dependencies:
+    "@zcorky/lru" "^1.0.3"
+
+"@zodash/cache@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.npmmirror.com/@zodash/cache/download/@zodash/cache-0.0.6.tgz#edc4abd7ea03a80d40f1d39618c0fc046d149007"
+  integrity sha1-7cSr1+oDqA1A8dOWGMD8BG0UkAc=
   dependencies:
     "@zcorky/lru" "^1.0.3"
 

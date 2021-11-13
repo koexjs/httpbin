@@ -66,6 +66,7 @@ export async function del(ctx: Context) {
 export async function headers(ctx: Context) {
   await ctx.json({
     headers: ctx.headers,
+    httpVersion: ctx.req.httpVersion,
   });
 }
 

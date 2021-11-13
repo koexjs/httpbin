@@ -50,6 +50,8 @@ import bankcard from './app/bankcard';
 
 import generatePassword from './app/generate-password';
 
+import dns from './app/dns';
+
 // declare module '@koex/core' {
 //   interface Request {
 //       body: any;
@@ -392,6 +394,8 @@ export function serve() {
   app.get('/qrcode', qrcode);
 
   app.get('/password/generate', generatePassword);
+
+  app.get('/dns', dns)
 
   const port = +process.env.PORT || 8080;
 
