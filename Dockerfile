@@ -1,5 +1,7 @@
 FROM node:16.3.0-alpine as build
 
+RUN apk add --update --virtual --no-cache python3 make g++
+
 WORKDIR /app
 
 COPY package.json .
