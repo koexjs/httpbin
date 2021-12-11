@@ -14,7 +14,7 @@ RUN yarn build
 
 FROM node:16.3.0-alpine
 
-RUN apk add --update --virtual --no-cache python3 make g++ && ln -sf python3 /usr/bin/python
+RUN apk add --update --virtual --no-cache python3 make g++
 
 ENV PORT=8080
 
