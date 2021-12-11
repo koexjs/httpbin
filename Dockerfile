@@ -1,4 +1,4 @@
-FROM node:14.15.3-alpine as build
+FROM node:16.3.0-alpine as build
 
 WORKDIR /app
 
@@ -12,7 +12,9 @@ COPY . .
 
 RUN yarn build
 
-FROM node:14.15.3-alpine
+FROM node:16.3.0-alpine
+
+RUN apk add --update --virtual --no-cache python3 make g++ && ln -sf python3 /usr/bin/python
 
 ENV PORT=8080
 
