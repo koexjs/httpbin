@@ -987,7 +987,7 @@
 
 "@znode/dns@^0.0.1":
   version "0.0.1"
-  resolved "https://registry.npmmirror.com/@znode/dns/download/@znode/dns-0.0.1.tgz#3e5ba597467ce2f452df11868a683850583995ec"
+  resolved "https://registry.npmjs.org/@znode/dns/-/dns-0.0.1.tgz#3e5ba597467ce2f452df11868a683850583995ec"
   integrity sha512-QTlimVc58+Hh01c0nbT1M5temrkiew+gd8RyqKyHVTEleVY6lF3y2CfoNMRJWaBTUoKrE4ORbiRQk+dwbNUoxw==
   dependencies:
     "@zodash/cache" "^0.0.6"
@@ -1145,8 +1145,8 @@
 
 "@zodash/cache@^0.0.6":
   version "0.0.6"
-  resolved "https://registry.npmmirror.com/@zodash/cache/download/@zodash/cache-0.0.6.tgz#edc4abd7ea03a80d40f1d39618c0fc046d149007"
-  integrity sha1-7cSr1+oDqA1A8dOWGMD8BG0UkAc=
+  resolved "https://registry.npmjs.org/@zodash/cache/-/cache-0.0.6.tgz#edc4abd7ea03a80d40f1d39618c0fc046d149007"
+  integrity sha512-nBOm9FAV1Bbyn/8k9t5xWR2Y553WHjHnhXXmG+JLTHwq3NdNOSZGXexpBcsH82JtqriX3Du+BvC2BXnmhmedJw==
   dependencies:
     "@zcorky/lru" "^1.0.3"
 
