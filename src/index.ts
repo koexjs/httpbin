@@ -76,11 +76,11 @@ declare module '@koex/core' {
 export function serve() {
   const app = new App();
 
-  app.use(async (ctx, next) => {
-    await next();
+  // app.use(async (ctx, next) => {
+  //   await next();
 
-    console.log('xxx:', ctx.response.header);
-  });
+  //   console.log('xxx:', ctx.response.header);
+  // });
 
   const env = {
     value: process.env.NODE_ENV,
@@ -406,7 +406,7 @@ export function serve() {
   ws('/ws', server);
   socketio('/socket.io', server);
   pbcopy('/pbcopy', server);
-  terminal('/terminal', server);
+  terminal('/terminal', port, server, app);
 }
 
 export default serve;

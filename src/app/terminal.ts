@@ -1,5 +1,6 @@
 import { Server } from 'http';
-import { relay } from '@cliz/web-terminal/lib/core/relay';
+import { Relay } from '@cliz/web-terminal/lib/core';
+import Application from '@koex/core';
 
 // import doreamon from '@zodash/doreamon';
 // import * as WebSocket from '@zodash/websocket';
@@ -131,13 +132,16 @@ import { relay } from '@cliz/web-terminal/lib/core/relay';
 //   return app;
 // }
 
-export default async (path: string, server: Server) => {
-  const app = await relay({
+export default async (path: string, port: number, server: Server, app: Application) => {
+  const relay = new Relay({
     path,
-    attachable: true,
+    port,
+    server,
   });
 
-  app.attach(server);
+  await relay.startWithWeb(app);
+
+  // app.attach(server);
 
   console.log('terminal online');
 };
