@@ -42,7 +42,7 @@ export default async function proxy(ctx: Context) {
   // ctx.logger.log(`proxy status:`, JSON.stringify(response.headers.raw(), null, 2));
 
   ctx.set(response.headers.raw() as any);
-  ctx.set('access-control-allow-origin', '*');
+  ctx.set('access-control-allow-origin', ctx.get('origin') || '*');
   ctx.set(
     'access-control-expose-headers',
     'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, Deprecation, Sunset',
