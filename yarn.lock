@@ -81,17 +81,17 @@
     ora "^4.0.4"
     pretty-ms "^7.0.1"
 
-"@cliz/web-terminal@^0.7.9":
-  version "0.7.9"
-  resolved "https://registry.npmjs.org/@cliz/web-terminal/-/web-terminal-0.7.9.tgz#6e82c56cb2a0d22f0c5ceba56a1684457a28a50d"
-  integrity sha512-54HaUOd6CKOVKyockAV+aGpaq/UXVDxQmVbqnysvTHumyxz8ffnY8pd/UekVcMU+XHQtcgZLFCf/snN9W/fkRQ==
+"@cliz/web-terminal@^0.7.10":
+  version "0.7.10"
+  resolved "https://registry.npmjs.org/@cliz/web-terminal/-/web-terminal-0.7.10.tgz#8aa2aa7323109b644c44cd4d12c1f61049899f56"
+  integrity sha512-wMPXffJLw4yHsWo2OlE8y7vnhpPDslOp3XY2XnKt/0YqtJtkF/znvyG4ZjBFs/BBqZdEScLXUvq0VMUZ2/9hvg==
   dependencies:
     "@cliz/cli" "^0.1.30"
     "@koex/core" "^0.13.34"
     "@types/ws" "^7.4.4"
     "@znode/nobot" "^0.0.6"
     "@znode/os-info" "^0.0.2"
-    "@znode/websocket" "^0.3.4"
+    "@znode/websocket" "^0.3.5"
     "@zodash/aes" "^0.0.4"
     "@zodash/doreamon" "^0.4.66"
     "@zodash/md5" "^0.0.5"
@@ -1079,10 +1079,10 @@
   resolved "https://registry.npmjs.org/@znode/os-info/-/os-info-0.0.2.tgz#bf6bcc9dbb4d85ae4121e0580ef3a29417632474"
   integrity sha512-q3nvgpKMn3a99VuMNQlusbPi7gOo7FWhOXXeYJR7a9Vim1CeFhyi51PUPTU2AaFAtBtVDn5Dqh/P5ekifrFNBw==
 
-"@znode/websocket@^0.3.4":
-  version "0.3.4"
-  resolved "https://registry.npmjs.org/@znode/websocket/-/websocket-0.3.4.tgz#535bd553194a2f43fd685291d9e3787c43a97f84"
-  integrity sha512-Kkx3bbh0o3mGP3hghJqzL1YDNTYFdJE40Jv2vrKxKWSMVhvQMigacQECRi1TF4BpxN5VdplC7o3eiJaTYgqWrA==
+"@znode/websocket@^0.3.5":
+  version "0.3.5"
+  resolved "https://registry.npmjs.org/@znode/websocket/-/websocket-0.3.5.tgz#c6ba884e5056cb5ee081f4c150a558825ee68a17"
+  integrity sha512-4/5d3VTiUemlgg0uqVSj7lG6KppGbn+oLdm6k93/A/6815ns6eGwiY6tzPjXc5/azZbXU/MPffb/jQn0WreBPQ==
   dependencies:
     "@types/ws" "^7.4.4"
     "@zodash/uuid" "^0.1.6"
