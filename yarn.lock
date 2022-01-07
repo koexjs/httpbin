@@ -81,21 +81,20 @@
     ora "^4.0.4"
     pretty-ms "^7.0.1"
 
-"@cliz/web-terminal@^0.7.2":
-  version "0.7.2"
-  resolved "https://registry.npmmirror.com/@cliz/web-terminal/download/@cliz/web-terminal-0.7.2.tgz#700a77e4ec8375fe3b7471d297c3e61bc8b26671"
-  integrity sha512-JxPfGr6wR+BGjKD0PSsN/XT0UlzPeAsHVEH3Un5BACwawclbnkh+b3rFgEq0AXCzwKMkkwuE+SrH7BR1xk6eaA==
+"@cliz/web-terminal@^0.7.9":
+  version "0.7.9"
+  resolved "https://registry.npmjs.org/@cliz/web-terminal/-/web-terminal-0.7.9.tgz#6e82c56cb2a0d22f0c5ceba56a1684457a28a50d"
+  integrity sha512-54HaUOd6CKOVKyockAV+aGpaq/UXVDxQmVbqnysvTHumyxz8ffnY8pd/UekVcMU+XHQtcgZLFCf/snN9W/fkRQ==
   dependencies:
     "@cliz/cli" "^0.1.30"
     "@koex/core" "^0.13.34"
     "@types/ws" "^7.4.4"
     "@znode/nobot" "^0.0.6"
     "@znode/os-info" "^0.0.2"
-    "@znode/websocket" "^0.2.10"
+    "@znode/websocket" "^0.3.4"
     "@zodash/aes" "^0.0.4"
     "@zodash/doreamon" "^0.4.66"
     "@zodash/md5" "^0.0.5"
-    "@zodash/websocket" "^0.1.5"
     debug "^4.3.1"
     node-pty "^0.10.1"
     open "^8.4.0"
@@ -1080,10 +1079,10 @@
   resolved "https://registry.npmjs.org/@znode/os-info/-/os-info-0.0.2.tgz#bf6bcc9dbb4d85ae4121e0580ef3a29417632474"
   integrity sha512-q3nvgpKMn3a99VuMNQlusbPi7gOo7FWhOXXeYJR7a9Vim1CeFhyi51PUPTU2AaFAtBtVDn5Dqh/P5ekifrFNBw==
 
-"@znode/websocket@^0.2.10":
-  version "0.2.10"
-  resolved "https://registry.npmjs.org/@znode/websocket/-/websocket-0.2.10.tgz#eabcad60b6d25484ee20f8d4a062fe2290a0b772"
-  integrity sha512-AzthQ7fUxsiF8L0J4rb3dJBq83c6vIQa2HyhpSf48W6TpjsSXNDKx8GN+kKdLvzEYwPGZx2TnD0aMTm4LAUPTA==
+"@znode/websocket@^0.3.4":
+  version "0.3.4"
+  resolved "https://registry.npmjs.org/@znode/websocket/-/websocket-0.3.4.tgz#535bd553194a2f43fd685291d9e3787c43a97f84"
+  integrity sha512-Kkx3bbh0o3mGP3hghJqzL1YDNTYFdJE40Jv2vrKxKWSMVhvQMigacQECRi1TF4BpxN5VdplC7o3eiJaTYgqWrA==
   dependencies:
     "@types/ws" "^7.4.4"
     "@zodash/uuid" "^0.1.6"
