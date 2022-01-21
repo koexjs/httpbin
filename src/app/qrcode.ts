@@ -107,7 +107,7 @@ export default async function qrcodeApp(ctx: Context) {
     return ;
   }
   
-  const { text, width } = ctx.query as any as INotifyData;
+  const { text, width } = ctx.query as any as INotifyData & {};
   if (!text) {
     ctx.throw(400, {
       code: 4007000,
@@ -116,11 +116,14 @@ export default async function qrcodeApp(ctx: Context) {
   }
 
   try {
-    const dataURL = await qrcode(text);
+    const dataURL = await qrcode(text, 'svg');
 
-    ctx.body = `<img style="width: ${
-      width ?? 'auto'
-    }; height: auto;" src=${dataURL} />`;
+    ctx.type = 'image/svg+xml';
+    ctx.body = dataURL; // Buffer.from(dataURL.split(',')[1], 'base64');
+
+    // ctx.body = `<img style="width: ${
+    //   width ?? 'auto'
+    // }; height: auto;" src=${dataURL} />`;
   } catch (error) {
     logger.error(error);
 

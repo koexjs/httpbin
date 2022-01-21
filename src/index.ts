@@ -29,7 +29,7 @@ import upload from './app/upload';
 
 import jsonp from './app/jsonp';
 import proxy from './app/proxy';
-import shorturl from './app/shorturl';
+import * as shorturl from './app/shorturl';
 import pdfViewer from './app/pdf-viewer';
 
 import email from './app/email';
@@ -371,7 +371,10 @@ export function serve() {
   // jsonp
   app.get('/jsonp', jsonp);
 
-  app.post('/shorturl', shorturl);
+  app.post('/shorturl/algorithm', shorturl.algorithm);
+  app.get('/shorturl', shorturl.renderPage);
+  app.post('/shorturl', shorturl.createShortUrlWithStorage);
+  app.get('/shorturl/:id', shorturl.getShortUrlWithStorage);
 
   // @TODO
   app.all('/proxy', proxy);
