@@ -1838,16 +1838,16 @@
   dependencies:
     clipboardy "^2.3.0"
 
-"@znode/cloud-object-storage@^0.3.7":
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/@znode/cloud-object-storage/-/cloud-object-storage-0.3.7.tgz#5409761f6a232ffe3c26d9ed8667a9f5ad034ab8"
-  integrity sha512-1bQ92ABFnnaD1wTsqpT5yBz2mYuwesk5yUtic3yud2yugWCleZxW7k8MV59232wznz4qasQjEFOgxaZePnMGiA==
+"@znode/cloud-object-storage@^0.3.8":
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/@znode/cloud-object-storage/-/cloud-object-storage-0.3.8.tgz#8a3bf3a4b485ee2272e1a7b332e4cf179a7dd94a"
+  integrity sha512-+jz/NQzEe6/yJZiSHJQEmJCPrrPjFleeJgc0VCR1mFxLOMzye4nU74EaNkzyJOHzwA1KReBSUDMfdbBIIkTHig==
   dependencies:
     "@aws-sdk/client-s3" "^3.40.0"
     "@types/ali-oss" "^6.16.1"
     "@types/ssh2-sftp-client" "^7.0.0"
     "@zcorky/fz" "^1.2.11"
-    "@znode/github" "^0.0.6"
+    "@znode/github" "^0.0.7"
     "@znode/to-stream" "^0.0.0"
     "@zodash/doreamon" "^1.0.2"
     ali-oss "^6.16.0"
@@ -1918,10 +1918,10 @@
     toml "^3.0.0"
     tslib "^2.3.1"
 
-"@znode/github@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@znode/github/-/github-0.0.6.tgz#b4d0c21b91b143f3892de68656e55b020135d3b1"
-  integrity sha512-mltK/NfTxz0iGmgyzocNHaXID93v+UROaNDC7RGnMmEGAc44HAseQitMEyN7hso6LBr5FECdlgm/VotKzqp49A==
+"@znode/github@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@znode/github/-/github-0.0.7.tgz#07f30d5480a443a714de1bfdaa1c1ede04f5c0be"
+  integrity sha512-PZg89tBg8xHefLcQku+UwlD1Iem3hj9tApjhtUbFTitA8LcUqMYZ6tf8c2teo5fidth1Hi+q3oGFMWrcB93GuQ==
   dependencies:
     "@octokit/core" "^3.5.1"
     "@zodash/base64" "^0.0.6"

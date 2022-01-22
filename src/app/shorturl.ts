@@ -9,6 +9,8 @@ const storage = new GitHubObjectStorage({
 });
 
 export async function createShortUrlWithStorage(ctx: Context) {
+  const _base_path = ctx.request.path;
+  const { prefix } = ctx.query; 
   const { url } = ctx.request.body;
 
   if (!process.env.GITHUB_DATASTORE_USER || !process.env.GITHUB_DATASTORE_TOKEN || !process.env.GITHUB_DATASTORE_REPO) {
@@ -26,7 +28,7 @@ export async function createShortUrlWithStorage(ctx: Context) {
   }
 
   const id = shorturl(url);
-  const path = `/shorturl/${id}`;
+  const path = `${prefix || _base_path}/${id}`;
 
   if (await storage.exists(path)) {
     ctx.body = {
@@ -322,19 +324,24 @@ export async function renderPage(ctx: Context) {
           $copy.addEventListener('click', onCopyResult);
 
           async function createShortUrl(url) {
-            const response = await fetch('/shorturl', {
-              method: 'POST',
-              headers: {
-                'content-type': 'application/json',
-              },
-              body: JSON.stringify({ url }),
-            });
-            const data = await response.json();
-            if (!response.ok) {
-              throw new Error('[' + data.code + '] ' + data.message);
+            try {
+              const response = await fetch(location.pathname, {
+                method: 'POST',
+                headers: {
+                  'content-type': 'application/json',
+                },
+                body: JSON.stringify({ url }),
+              });
+              const data = await response.json();
+              if (!response.ok) {
+                throw new Error('[' + data.code + '] ' + data.message);
+              }
+  
+              return data.shorturl;
+            } catch (error) {
+              console.error('createShortUrl error:', error);
+              notifyError('网络开小差(' + error.message + ')')
             }
-
-            return data.shorturl;
           }
 
           function notify(message, style) {
