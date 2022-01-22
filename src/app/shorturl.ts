@@ -31,11 +31,11 @@ export async function createShortUrlWithStorage(ctx: Context) {
   const filepath = `/shorturl/${id}`;
 
   const path = `${prefix || _base_path}/${id}`;
-  const shorturl = `${ctx.protocol}://${ctx.host}${path}`;
+  const _shorturl = `${ctx.protocol}://${ctx.host}${path}`;
 
   if (await storage.exists(filepath)) {
     ctx.body = {
-      shorturl,
+      shorturl: _shorturl,
     };
 
     return;
@@ -53,7 +53,7 @@ export async function createShortUrlWithStorage(ctx: Context) {
   }
 
   ctx.body = {
-    shorturl,
+    shorturl: _shorturl,
   };
 }
 
