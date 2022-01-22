@@ -30,8 +30,10 @@ export async function createShortUrlWithStorage(ctx: Context) {
   const id = shorturl(url);
   const filepath = `/shorturl/${id}`;
 
-  const path = `${prefix || _base_path}/${id}`;
+  const path = `${prefix || _base_path}/${id}`.replace(/\/{2,}/g, '/');
   const _shorturl = `${ctx.protocol}://${ctx.host}${path}`;
+
+  console.log('xx:', _base_path, prefix, path, _shorturl);
 
   if (await storage.exists(filepath)) {
     ctx.body = {
@@ -303,7 +305,7 @@ export async function renderPage(ctx: Context) {
         </div>
         <div class="result">
           <div class="result-inner">
-            <img class="qrcode" src="http://127.0.0.1:8080/qrcode?text=666&type=image" />
+            <img class="qrcode" src="#" />
             <div class="content">
               <div class="title">
                 <span>短链接：</span>
