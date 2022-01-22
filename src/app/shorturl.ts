@@ -28,18 +28,21 @@ export async function createShortUrlWithStorage(ctx: Context) {
   }
 
   const id = shorturl(url);
-  const path = `${prefix || _base_path}/${id}`;
+  const filepath = `/shorturl/${id}`;
 
-  if (await storage.exists(path)) {
+  const path = `${prefix || _base_path}/${id}`;
+  const shorturl = `${ctx.protocol}://${ctx.host}${path}`;
+
+  if (await storage.exists(filepath)) {
     ctx.body = {
-      shorturl: `${ctx.protocol}://${ctx.host}${path}`,
+      shorturl,
     };
 
     return;
   }
 
   try {
-    await storage.create(path, url);
+    await storage.create(filepath, url);
   } catch (error) {
     console.error('create short url error:', error)
 
@@ -50,7 +53,7 @@ export async function createShortUrlWithStorage(ctx: Context) {
   }
 
   ctx.body = {
-    shorturl: `${ctx.protocol}://${ctx.host}${path}`,
+    shorturl,
   };
 }
 
@@ -64,10 +67,10 @@ export async function getShortUrlWithStorage(ctx: Context) {
     });
   }
 
-  const path = `/shorturl/${id}`;
+  const filepath = `/shorturl/${id}`;
 
   try {
-    await storage.exists(path);
+    await storage.exists(filepath);
   } catch (error) {
     ctx.throw(404, {
       code: 4041002,
@@ -75,7 +78,7 @@ export async function getShortUrlWithStorage(ctx: Context) {
     });
   }
 
-  const stream = await storage.get(path);
+  const stream = await storage.get(filepath);
   const url = await new Promise<string>(async (resolve) => {
     const chunks = [];
     stream.on('data', c => {
@@ -324,24 +327,19 @@ export async function renderPage(ctx: Context) {
           $copy.addEventListener('click', onCopyResult);
 
           async function createShortUrl(url) {
-            try {
-              const response = await fetch(location.pathname, {
-                method: 'POST',
-                headers: {
-                  'content-type': 'application/json',
-                },
-                body: JSON.stringify({ url }),
-              });
-              const data = await response.json();
-              if (!response.ok) {
-                throw new Error('[' + data.code + '] ' + data.message);
-              }
-  
-              return data.shorturl;
-            } catch (error) {
-              console.error('createShortUrl error:', error);
-              notifyError('网络开小差(' + error.message + ')')
+            const response = await fetch(location.pathname, {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json',
+              },
+              body: JSON.stringify({ url }),
+            });
+            const data = await response.json();
+            if (!response.ok) {
+              throw new Error('[' + data.code + '] ' + data.message);
             }
+
+            return data.shorturl;
           }
 
           function notify(message, style) {
