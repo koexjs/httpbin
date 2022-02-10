@@ -1926,6 +1926,13 @@
     "@octokit/core" "^3.5.1"
     "@zodash/base64" "^0.0.6"
 
+"@znode/mail@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.npmjs.org/@znode/mail/-/mail-0.0.5.tgz#08f2dee7ae6a8fbc52d7afb7df3056bdec3a8432"
+  integrity sha512-skg4xddUUimiWYMSCIXQzV6QWs+0uPglYAi8I9j57plnbW9R8D/th9BvQ+qj8/5GzPRQ5jk7RwAQNMtsBX4KuA==
+  dependencies:
+    nodemailer "^6.4.17"
+
 "@znode/nobot-dingtalk@^0.0.4":
   version "0.0.4"
   resolved "https://registry.npmjs.org/@znode/nobot-dingtalk/-/nobot-dingtalk-0.0.4.tgz#231eff829f6692cdaf0df8dac25d57a4f4a5f88d"
@@ -2572,13 +2579,6 @@
     "@zcorky/moment" "^1.0.12"
     "@zodash/format" "^1.2.9"
     "@zodash/onion" "^0.1.8"
-
-"@zodash/mail@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@zodash/mail/-/mail-0.0.2.tgz#7c4af5b246a85793af3c57ac2e4ffec0128b22f0"
-  integrity sha512-o1jDpj89pE2wPhc5zfnPr9OdUZt3O9s5U0G5HSRG6M2VtdKsZqrELTX2vWg68sdE6biEidQqpc4Bx5nwhgTpJA==
-  dependencies:
-    nodemailer "^6.4.17"
 
 "@zodash/map@^1.1.7":
   version "1.1.9"

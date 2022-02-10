@@ -1,5 +1,5 @@
 import { Context } from '@koex/core';
-import mail, { createClientByProvider } from '@zodash/mail';
+import mail, { createClientByProvider } from '@znode/mail';
 
 export default async function email(ctx: Context) {
   ctx.logger.log('send email:', JSON.stringify(ctx.request.body, null, 2));
@@ -23,6 +23,7 @@ export default async function email(ctx: Context) {
 
   try {
     await _client.send({
+      from: content.from,
       to: content.to,
       subject: content.subject,
       content: content.content,
