@@ -199,10 +199,10 @@ export function serve() {
 
   app.use(async (ctx, next) => {
     time.start();
-    ctx.logger.info(`=> ${ctx.method} ${ctx.originalUrl}`);
+    ctx.logger.info(`=> [${ctx.ip}] ${ctx.method} ${ctx.originalUrl} - ${ctx.get('user-agent')}`);
     await next();
     ctx.logger.info(
-      `<= ${ctx.method} ${ctx.originalUrl} ${ctx.status} ${time.end()}ms`,
+      `<= [${ctx.ip}] ${ctx.method} ${ctx.originalUrl} ${ctx.status} ${time.end()}ms`,
     );
   });
 
