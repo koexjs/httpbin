@@ -1,7 +1,7 @@
 {
   "name": "@koex/httpbin",
   "version": "1.0.0",
-  "main": "",
+  "main": "./lib/index.js",
   "author": "Zero",
   "license": "MIT",
   "bin": {
