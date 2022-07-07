@@ -101,7 +101,7 @@ export default (path: string, server: Server) => {
       return;
     }
 
-    app.handleUpgrade(request, socket, head, (ws) => {
+    (app.handleUpgrade as any)(request, socket, head, (ws) => {
       app.emit('connection', ws, request);
     });
   });

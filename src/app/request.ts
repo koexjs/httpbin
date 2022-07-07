@@ -1,18 +1,22 @@
 import { Context } from '@koex/core';
 
 export async function get(ctx: Context) {
-  await ctx.json({
+  const data = {
     method: ctx.method,
     url: ctx.url,
     query: ctx.query,
     params: ctx.params,
     headers: ctx.headers,
     origin: ctx.origin,
-  });
+  };
+
+  console.log('[request.get] data:', data);
+
+  await ctx.json(data);
 }
 
 export async function post(ctx: Context) {
-  await ctx.json({
+  const data = {
     method: ctx.method,
     url: ctx.url,
     query: ctx.query,
@@ -21,11 +25,13 @@ export async function post(ctx: Context) {
     files: ctx.files,
     headers: ctx.headers,
     origin: ctx.origin,
-  });
+  }
+  console.log('[request.post] data:', data);
+  await ctx.json(data);
 }
 
 export async function put(ctx: Context) {
-  await ctx.json({
+  const data = {
     method: ctx.method,
     url: ctx.url,
     query: ctx.query,
@@ -34,11 +40,13 @@ export async function put(ctx: Context) {
     files: ctx.files,
     headers: ctx.headers,
     origin: ctx.origin,
-  });
+  };
+  console.log('[request.put] data:', data);
+  await ctx.json(data);
 }
 
 export async function patch(ctx: Context) {
-  await ctx.json({
+  const data = {
     method: ctx.method,
     url: ctx.url,
     query: ctx.query,
@@ -47,11 +55,13 @@ export async function patch(ctx: Context) {
     files: ctx.files,
     headers: ctx.headers,
     origin: ctx.origin,
-  });
+  };
+  console.log('[request.patch] data:', data);
+  await ctx.json(data);
 }
 
 export async function del(ctx: Context) {
-  await ctx.json({
+  const data = {
     method: ctx.method,
     url: ctx.url,
     query: ctx.query,
@@ -60,10 +70,25 @@ export async function del(ctx: Context) {
     files: ctx.files,
     headers: ctx.headers,
     origin: ctx.origin,
-  });
+  };
+  console.log('[request.del] data:', data);
+  await ctx.json(data);
 }
 
 export async function headers(ctx: Context) {
+  const data = {
+    method: ctx.method,
+    url: ctx.url,
+    query: ctx.query,
+    params: ctx.params,
+    body: ctx.request.body,
+    files: ctx.files,
+    headers: ctx.headers,
+    origin: ctx.origin,
+  };
+  
+  console.log('[request.headers] data:', data);
+
   await ctx.json({
     headers: ctx.headers,
     httpVersion: ctx.req.httpVersion,
