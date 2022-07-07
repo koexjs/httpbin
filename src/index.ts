@@ -209,6 +209,19 @@ export function serve() {
   app.get('/health', health);
 
   app.get('/', async (ctx) => {
+    const data = {
+      method: ctx.method,
+      url: ctx.url,
+      query: ctx.query,
+      params: ctx.params,
+      body: ctx.request.body,
+      files: ctx.files,
+      headers: ctx.headers,
+      origin: ctx.origin,
+    };
+    
+    console.log('[home] data:', data);
+
     ctx.body = 'hello, world';
   });
 
