@@ -206,10 +206,8 @@ export function serve() {
     );
   });
 
-  app.get('/health', health);
-
-  app.get('/', async (ctx) => {
-    const data = {
+  app.use(async (ctx, next) => {
+    const request = {
       method: ctx.method,
       url: ctx.url,
       query: ctx.query,
@@ -219,9 +217,21 @@ export function serve() {
       headers: ctx.headers,
       origin: ctx.origin,
     };
-    
-    console.log('[home] data:', data);
 
+    const key = `${request.method} ${request.url}`;
+
+    console.log(`[${key}][request]:`, JSON.stringify(request, null, 2));
+    
+    await next();
+
+    if (!!ctx.body && ctx.accepts('json', 'text/html')) {
+      console.log(`[${key}][response]:`, JSON.stringify(ctx.body, null, 2));
+    }
+  });
+
+  app.get('/health', health);
+
+  app.all('/', async (ctx) => {
     ctx.body = 'hello, world';
   });
 
