@@ -234,6 +234,13 @@ export function serve() {
   app.use(ratelimit({
     duration: 1 * 60 * 1000,
     max: +process.env.RATELIMIT_PER_MINUTE || 60,
+    key: ctx => {
+      if (!!process.env.RATELIMIT_HEADER_KEY) {
+        return ctx.get(process.env.RATELIMIT_HEADER_KEY) || ctx.ip;
+      }
+
+      return ctx.get('x-real-ip') || ctx.ip;
+    },
   }))
 
   app.get('/health', health);
