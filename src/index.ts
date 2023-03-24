@@ -52,6 +52,8 @@ import generatePassword from './app/generate-password';
 
 import dns from './app/dns';
 
+import ratelimit from '@koex/ratelimit';
+
 // declare module '@koex/core' {
 //   interface Request {
 //       body: any;
@@ -228,6 +230,11 @@ export function serve() {
       console.log(`[${key}][response]:`, JSON.stringify(ctx.body, null, 2));
     }
   });
+
+  app.use(ratelimit({
+    duration: 1 * 60 * 1000,
+    max: +process.env.RATELIMIT_PER_MINUTE || 60,
+  }))
 
   app.get('/health', health);
 

@@ -1289,6 +1289,17 @@
     "@zodash/logger" "^0.2.16"
     tree-kill "^1.2.2"
 
+"@koex/ratelimit@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npmmirror.com/@koex/ratelimit/-/ratelimit-1.0.2.tgz#ff31b4fed3c54cd0c90ba45badf53607a4bd6a17"
+  integrity sha512-cuS4+LWKXr24K9V9CVOfFIq0rrsY0UPwCB9tBdQGGuV/3j2nkl01T/te9Pe5vAGBaRksNr+zoNddfodMdJZgtQ==
+  dependencies:
+    "@koex/type" "^1.0.2"
+    "@zcorky/is" "^1.0.6"
+    "@zcorky/lru" "^1.0.3"
+    debug "^4.1.0"
+    ms "^2.1.1"
+
 "@koex/router@^0.10.0":
   version "0.10.0"
   resolved "https://registry.npmmirror.com/@koex/router/-/router-0.10.0.tgz#a0843ec634da55f2c432e4e264cec209ce533da6"
@@ -1323,6 +1334,13 @@
   version "0.13.29"
   resolved "https://registry.npmmirror.com/@koex/type/-/type-0.13.29.tgz#ac7e33eaceb5da687f8463278d9b16b1783bb0c9"
   integrity sha512-efemTudWnS3k75h05L75KMdRM0QOsOa2moxUywXpCjGmE1rFM6hI1unyreEMELwSns3M9AQ9cjwmcmF7ASWVZQ==
+  dependencies:
+    "@types/koa-compose" "^3.2.4"
+
+"@koex/type@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npmmirror.com/@koex/type/-/type-1.0.2.tgz#98834cc00914e4277cb8737536427e6938bf01ec"
+  integrity sha512-oXguPfrBsf9MPhsSqbo0fVA2JCb/Byuiox73YNpqTFPkwLC3vqzr0yG69J5M7YiTA17rZCAkkLVcUpDeqolwmQ==
   dependencies:
     "@types/koa-compose" "^3.2.4"
 
