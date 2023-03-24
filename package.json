@@ -38,7 +38,7 @@
     "@koex/body": "^0.0.8",
     "@koex/core": "^0.10.0",
     "@koex/cors": "^0.0.2",
-    "@koex/ratelimit": "^1.0.2",
+    "@koex/ratelimit": "^1.0.3",
     "@koex/static": "^0.13.2",
     "@types/basic-auth": "^1.1.2",
     "@typescript-eslint/eslint-plugin": "^4.28.4",

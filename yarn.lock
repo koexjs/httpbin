@@ -1289,10 +1289,10 @@
     "@zodash/logger" "^0.2.16"
     tree-kill "^1.2.2"
 
-"@koex/ratelimit@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npmmirror.com/@koex/ratelimit/-/ratelimit-1.0.2.tgz#ff31b4fed3c54cd0c90ba45badf53607a4bd6a17"
-  integrity sha512-cuS4+LWKXr24K9V9CVOfFIq0rrsY0UPwCB9tBdQGGuV/3j2nkl01T/te9Pe5vAGBaRksNr+zoNddfodMdJZgtQ==
+"@koex/ratelimit@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@koex/ratelimit/-/ratelimit-1.0.3.tgz#0ca8df2dcc8880be96de040bace171b8ca2bef6d"
+  integrity sha512-5sYJgsNIkJf2/ie1H6X4fmOx0femYEBCG30yZkIqPrCgZdLr3xPWO+e3IQTbjt6WnHztdCau+oazE+cHhIxnkQ==
   dependencies:
     "@koex/type" "^1.0.2"
     "@zcorky/is" "^1.0.6"
