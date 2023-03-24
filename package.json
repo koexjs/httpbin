@@ -1,9 +1,9 @@
 {
   "name": "@koex/httpbin",
-  "version": "1.0.3",
-  "main": "./lib/index.js",
-  "author": "Zero",
+  "version": "1.2.0",
   "license": "MIT",
+  "author": "Zero",
+  "main": "./lib/index.js",
   "bin": {
     "httpbin": "./lib/cli.js",
     "koex-httpbin": "./lib/cli.js"
@@ -15,14 +15,6 @@
     "fmt": "eslint src/**/*.{ts,tsx} --fix && prettier --write src/**/{*.ts,*.tsx}",
     "commit": "cz",
     "clean": "rimraf -rf lib"
-  },
-  "devDependencies": {
-    "@types/node": "^16.4.0",
-    "@types/pdfjs-dist": "^2.1.7",
-    "@types/socket.io": "^2.1.13",
-    "@types/ws": "^7.4.0",
-    "tsc-watch": "^4.2.9",
-    "tsconfig-paths": "^3.9.0"
   },
   "lint-staged": {
     "**/*.ts": [
@@ -80,6 +72,14 @@
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
     "ws": "^7.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.4.0",
+    "@types/pdfjs-dist": "^2.1.7",
+    "@types/socket.io": "^2.1.13",
+    "@types/ws": "^7.4.0",
+    "tsc-watch": "^4.2.9",
+    "tsconfig-paths": "^3.9.0"
   },
   "publishConfig": {
     "access": "public"
