@@ -139,6 +139,8 @@ export default (path: string, server: Server) => {
   server.on('upgrade', (request, socket, head) => {
     const pathname = url.parse(request.url).pathname;
 
+    console.log("upgrade headers:", request.headers, path, pathname);
+
     if (path !== pathname) {
       // console.log('destroy on upgrade:', pathname);
       // return socket.destroy();

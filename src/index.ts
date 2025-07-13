@@ -52,6 +52,8 @@ import generatePassword from './app/generate-password';
 
 import dns from './app/dns';
 
+import webhook from './app/webhook';
+
 import ratelimit from '@koex/ratelimit';
 
 // declare module '@koex/core' {
@@ -436,6 +438,8 @@ export function serve() {
   app.get('/password/generate', generatePassword);
 
   app.get('/dns', dns)
+
+  app.all('/webhook', webhook);
 
   const port = +process.env.PORT || 8080;
 
