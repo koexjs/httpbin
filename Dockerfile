@@ -1,4 +1,4 @@
-FROM node:16.3.0-alpine as build
+FROM node:20-alpine as build
 
 RUN apk add --update --virtual --no-cache python3 make g++
 
@@ -14,7 +14,7 @@ COPY . .
 
 RUN yarn build
 
-FROM node:16.3.0-alpine
+FROM node:20-alpine
 
 RUN apk add --update --virtual --no-cache python3 make g++
 
