@@ -1,6 +1,6 @@
 {
   "name": "@koex/httpbin",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "license": "MIT",
   "author": "Zero",
   "main": "./lib/index.js",
@@ -8,6 +8,12 @@
     "httpbin": "./lib/cli.js",
     "koex-httpbin": "./lib/cli.js"
   },
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.prod.json",
     "dev": "tsc-watch -p tsconfig.json --onSuccess \"node lib/serve.js\"",
